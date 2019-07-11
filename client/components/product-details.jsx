@@ -42,7 +42,7 @@ class ProductDetails extends React.Component {
       };
       return (
         <div className="container mt-5 border border-primary p-4">
-          <div onClick={this.setViewCallback.bind(this)} className="row mb-4">
+          <div onClick={this.setViewCallback.bind(this)} className="cursor row mb-4">
             <div className="col text-secondary">&lt;Back to catalog</div>
           </div>
           <div className="row mt-4">

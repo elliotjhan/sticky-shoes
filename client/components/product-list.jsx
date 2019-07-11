@@ -13,12 +13,7 @@ class ProductList extends React.Component {
     });
 
     return (
-    //   <div className="container">
-    //       <div className="row">{eachProductList[0]} {eachProductList[1]} {eachProductList[2]}</div>
-    //       <div className="row">{eachProductList[3]} {eachProductList[4]} {eachProductList[5]}</div>
-    //       <div className="row">{eachProductList[6]} {eachProductList[7]} {eachProductList[8]}</div>
-    //   </div>
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">{eachProductList}</div>
       </div>
     );
