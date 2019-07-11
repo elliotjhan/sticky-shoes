@@ -37,24 +37,32 @@ class App extends React.Component {
     this.setState({
       view: {
         name: name,
-        params: params
+        params: {
+          id: params
+        }
       }
     });
   }
 
   render() {
-    return (
-      <div>
+    let currentView = this.state.view;
+    let clickedId = currentView.params.id;
+    if (currentView.name !== 'catalog') {
+      return (
+        <div>
+          <Header/>
+          <ProductDetails setView={this.setView} id={clickedId}/>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Header/>
+          <ProductList setView={this.setView} productList={this.state.products}/>
+        </div>
+      );
+    }
 
-        <Header/>
-
-        <ProductList setView={this.setView} productList={this.state.products}/>
-
-        <ProductDetails/>
-
-      </div>
-
-    );
   }
 }
 

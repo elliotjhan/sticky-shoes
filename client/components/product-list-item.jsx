@@ -5,7 +5,8 @@ class ProductListItem extends React.Component {
   setViewCallback() {
     let product = this.props.product;
     let callback = this.props.setView;
-    callback(product.name, product.id);
+    let details = 'details';
+    callback(details, product.id);
   }
 
   render() {

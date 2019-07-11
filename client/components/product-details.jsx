@@ -9,7 +9,7 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.retrieveProductById(1);
+    this.retrieveProductById(this.props.id);
   }
 
   retrieveProductById(id) {
@@ -21,6 +21,12 @@ class ProductDetails extends React.Component {
       }).catch(error => {
         console.error('error: ', error);
       });
+  }
+
+  setViewCallback() {
+    let callback = this.props.setView;
+    let catalog = 'catalog';
+    callback(catalog, this.state.product.id);
   }
 
   render() {
@@ -35,22 +41,25 @@ class ProductDetails extends React.Component {
         backgroundRepeat: 'no-repeat'
       };
       return (
-        <div className="container">
-          <div className="row">
+        <div className="container mt-5 border border-primary p-4">
+          <div onClick={this.setViewCallback.bind(this)} className="row mb-4">
+            <div className="col text-secondary">&lt;Back to catalog</div>
+          </div>
+          <div className="row mt-4">
             <div className="col productItem" style={style}></div>
             <div className="text-center col-sm-6 mt-3">
-              <div className="display-4">{product.name}</div><br/>
-              <div className="font-weight-bold">${product.price}</div><br/>
+              <div className="display-3">{product.name}</div><br/>
+              <h3 className="font-weight-bold">${product.price}</h3><br/>
               <div className="font-italic">{product.shortDescription}</div>
             </div>
           </div>
-          <div className="row">
+          <div className="row mt-5">
             <div className="col">{product.longDescription}</div>
           </div>
         </div>
       );
     } else {
-      return <div>loading...</div>;
+      return <div></div>;
     }
   }
 
