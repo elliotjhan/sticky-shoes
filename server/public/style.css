@@ -1,4 +1,15 @@
 .productImage {
-    height: 100px;
-    width: 100px;
+    height: 20vh;
+}
+.sleigh {
+    color: red;
+}
+.productItem {
+    height: 30vh;
+}
+.cursor {
+    cursor: pointer;
+}
+.spacer {
+    margin: 
 }

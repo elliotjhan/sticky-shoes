@@ -1,0 +1,68 @@
+import React from 'react';
+
+class ProductDetails extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: null
+    };
+  }
+
+  componentDidMount() {
+    this.retrieveProductById(this.props.id);
+  }
+
+  retrieveProductById(id) {
+    fetch('/api/products.php?id=' + id)
+      .then(response => {
+        return response.json();
+      }).then(myJson => {
+        this.setState({ product: myJson });
+      }).catch(error => {
+        console.error('error: ', error);
+      });
+  }
+
+  setViewCallback() {
+    let callback = this.props.setView;
+    let catalog = 'catalog';
+    callback(catalog, this.state.product.id);
+  }
+
+  render() {
+
+    if (this.state.product !== null) {
+      let product = this.state.product;
+      let imageUrl = product.image;
+      const style = {
+        backgroundImage: `url(${imageUrl})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat'
+      };
+      return (
+        <div className="container mt-5 border border-primary p-4">
+          <div onClick={this.setViewCallback.bind(this)} className="cursor row mb-4">
+            <div className="col text-secondary">&lt;Back to catalog</div>
+          </div>
+          <div className="row mt-4">
+            <div className="col productItem" style={style}></div>
+            <div className="text-center col-sm-6 mt-3">
+              <div className="display-3">{product.name}</div><br/>
+              <h3 className="font-weight-bold">${product.price}</h3><br/>
+              <div className="font-italic">{product.shortDescription}</div>
+            </div>
+          </div>
+          <div className="row mt-5">
+            <div className="col">{product.longDescription}</div>
+          </div>
+        </div>
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+
+}
+
+export default ProductDetails;
