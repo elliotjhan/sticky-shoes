@@ -1,14 +1,19 @@
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
+import ProductDetails from './product-details';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      products: [],
+      view: {
+        name: 'catalog',
+        params: {}
+      }
     };
-
+    this.setView = this.setView.bind(this);
   }
 
   componentDidMount() {
@@ -28,19 +33,29 @@ class App extends React.Component {
       });
   }
 
+  setView(name, params) {
+    this.setState({
+      view: {
+        name: name,
+        params: params
+      }
+    });
+  }
+
   render() {
     return (
       <div>
 
         <Header/>
 
-        <ProductList productList={this.state.products}/>
+        <ProductList setView={this.setView} productList={this.state.products}/>
+
+        <ProductDetails/>
 
       </div>
 
     );
   }
-
 }
 
 export default App;
