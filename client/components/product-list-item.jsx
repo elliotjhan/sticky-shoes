@@ -14,11 +14,11 @@ class ProductListItem extends React.Component {
 
     return (
 
-      <div className="img-fluid row border border-primary mb-3 p-3">
-        <div className="col productImage" style={style}></div>
-        <div className="col align-self-center font-weight-bold">{product.name}</div>
-        <div className="col align-self-center">${product.price}</div>
-        <div className="col align-self-center font-italic">{product.shortDescription}</div>
+      <div className="col img-fluid border border-primary m-3 p-3">
+        <div className="productImage rounded mx-auto d-block" style={style}></div>
+        <div className="text-center font-weight-bold">{product.name}</div>
+        <div className="text-center">${product.price}</div>
+        <div className="text-center font-italic">{product.shortDescription}</div>
       </div>
 
     );
