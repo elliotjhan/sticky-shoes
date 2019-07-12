@@ -27,7 +27,7 @@ class ProductDetails extends React.Component {
   setViewCallback() {
     let callback = this.props.setView;
     let catalog = 'catalog';
-    callback(catalog, this.state.product.id);
+    callback(catalog, this.state.product);
   }
 
   addToCart() {
@@ -57,7 +57,7 @@ class ProductDetails extends React.Component {
               <div className="display-3">{product.name}</div><br/>
               <h3 className="font-weight-bold">${product.price}</h3><br/>
               <div className="font-italic">{product.shortDescription}</div><br/>
-              <button onClick={this.addToCart}>Add To Cart</button>
+              <button className="btn btn-primary" onClick={this.addToCart}>Add To Cart</button>
             </div>
           </div>
           <div className="row mt-4">
