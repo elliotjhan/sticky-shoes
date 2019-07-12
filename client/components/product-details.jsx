@@ -6,6 +6,7 @@ class ProductDetails extends React.Component {
     this.state = {
       product: null
     };
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +30,11 @@ class ProductDetails extends React.Component {
     callback(catalog, this.state.product.id);
   }
 
+  addToCart() {
+    let addCartCallback = this.props.addToCart;
+    addCartCallback(this.state.product);
+  }
+
   render() {
 
     if (this.state.product !== null) {
@@ -50,16 +56,17 @@ class ProductDetails extends React.Component {
             <div className="text-center col-sm-6 mt-3">
               <div className="display-3">{product.name}</div><br/>
               <h3 className="font-weight-bold">${product.price}</h3><br/>
-              <div className="font-italic">{product.shortDescription}</div>
+              <div className="font-italic">{product.shortDescription}</div><br/>
+              <button onClick={this.addToCart}>Add To Cart</button>
             </div>
           </div>
-          <div className="row mt-5">
+          <div className="row mt-4">
             <div className="col">{product.longDescription}</div>
           </div>
         </div>
       );
     } else {
-      return <div></div>;
+      return null;
     }
   }
 

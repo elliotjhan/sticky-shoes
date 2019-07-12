@@ -11,13 +11,16 @@ class App extends React.Component {
       view: {
         name: 'catalog',
         params: {}
-      }
+      },
+      cart: []
     };
     this.setView = this.setView.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
     this.getProducts();
+    this.getCartItems();
   }
 
   getProducts() {
@@ -44,20 +47,55 @@ class App extends React.Component {
     });
   }
 
+  getCartItems() {
+    fetch('/api/cart.php')
+      .then(response => {
+        return response.json();
+      })
+      .then(myJson => {
+        this.setState({
+          cart: myJson
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  addToCart(product) {
+    fetch('/api/cart.php', {
+      method: 'POST',
+      body: JSON.stringify(product),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(product => {
+        let cartArray = this.state.cart;
+        cartArray.push(product);
+        this.setState({
+          cart: cartArray
+        });
+      })
+      .catch(error => {
+        console.error('Post Error: ', error);
+      });
+  }
+
   render() {
     let currentView = this.state.view;
     let clickedId = currentView.params.id;
     if (currentView.name !== 'catalog') {
       return (
         <div>
-          <Header/>
-          <ProductDetails setView={this.setView} id={clickedId}/>
+          <Header cart={this.state.cart.length}/>
+          <ProductDetails addToCart={this.addToCart} setView={this.setView} id={clickedId}/>
         </div>
       );
     } else {
       return (
         <div>
-          <Header/>
+          <Header cart={this.state.cart.length}/>
           <ProductList setView={this.setView} productList={this.state.products}/>
         </div>
       );
