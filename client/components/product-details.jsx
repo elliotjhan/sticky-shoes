@@ -27,12 +27,16 @@ class ProductDetails extends React.Component {
   setViewCallback() {
     let callback = this.props.setView;
     let catalog = 'catalog';
-    callback(catalog, this.state.product.id);
+    callback(catalog, this.state.product);
   }
 
   addToCart() {
     let addCartCallback = this.props.addToCart;
     addCartCallback(this.state.product);
+  }
+
+  numberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   render() {
@@ -55,9 +59,9 @@ class ProductDetails extends React.Component {
             <div className="col productItem" style={style}></div>
             <div className="text-center col-sm-6 mt-3">
               <div className="display-3">{product.name}</div><br/>
-              <h3 className="font-weight-bold">${product.price}</h3><br/>
+              <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3><br/>
               <div className="font-italic">{product.shortDescription}</div><br/>
-              <button onClick={this.addToCart}>Add To Cart</button>
+              <button className="btn btn-primary" onClick={this.addToCart}>Add To Cart</button>
             </div>
           </div>
           <div className="row mt-4">
