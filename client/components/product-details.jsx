@@ -35,6 +35,10 @@ class ProductDetails extends React.Component {
     addCartCallback(this.state.product);
   }
 
+  numberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   render() {
 
     if (this.state.product !== null) {
@@ -55,7 +59,7 @@ class ProductDetails extends React.Component {
             <div className="col productItem" style={style}></div>
             <div className="text-center col-sm-6 mt-3">
               <div className="display-3">{product.name}</div><br/>
-              <h3 className="font-weight-bold">${product.price}</h3><br/>
+              <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3><br/>
               <div className="font-italic">{product.shortDescription}</div><br/>
               <button className="btn btn-primary" onClick={this.addToCart}>Add To Cart</button>
             </div>

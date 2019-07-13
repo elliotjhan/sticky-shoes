@@ -3,6 +3,18 @@ import CartSummaryItem from './cart-summary-item';
 
 class CartSummary extends React.Component {
 
+  numberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  getCartTotal() {
+    let cartTotal = null;
+    this.props.cart.forEach(element => {
+      cartTotal += element.price;
+    });
+    return this.numberWithCommas(cartTotal);
+  }
+
   setViewCallback() {
     let callback = this.props.setView;
     let catalog = 'catalog';
@@ -30,7 +42,7 @@ class CartSummary extends React.Component {
             {cartItemArrayDisplay}
           </div>
           <div className="row">
-            <h2 className="col text-right">Item Total $</h2>
+            <h2 className="col text-right mt-3">Item Total ${this.getCartTotal()}</h2>
           </div>
         </div>
       );

@@ -62,6 +62,11 @@ class App extends React.Component {
   }
 
   addToCart(product) {
+    let cartArray = this.state.cart;
+    cartArray.push(product);
+    this.setState({
+      cart: cartArray
+    }, this.getCartTotal);
     fetch('/api/cart.php', {
       method: 'POST',
       body: JSON.stringify(product),
@@ -69,13 +74,6 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(product => {
-        let cartArray = this.state.cart;
-        cartArray.push(product);
-        this.setState({
-          cart: cartArray
-        });
-      })
       .catch(error => {
         console.error('Post Error: ', error);
       });
