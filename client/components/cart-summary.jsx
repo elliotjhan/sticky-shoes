@@ -32,7 +32,7 @@ class CartSummary extends React.Component {
   render() {
     var cartItemArray = this.props.cart;
     var cartItemArrayDisplay = null;
-    if (cartItemArray !== 0) {
+    if (cartItemArray.length !== 0) {
       cartItemArrayDisplay = cartItemArray.map(element => {
         return <CartSummaryItem className="row" key={element.id} cart={element}/>;
       });
