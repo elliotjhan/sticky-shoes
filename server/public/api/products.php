@@ -11,9 +11,16 @@ require_once('functions.php');
 set_exception_handler('error_handler');
 startup();
 
+if(empty($_GET['id'])) {
+    $whereClause = "";
+} else {
+    $id = $_GET['id'];
+    $whereClause = "WHERE id = {$id}";
+}
+
 require_once('db_connection.php');
 
-$query = "SELECT * FROM products";
+$query = "SELECT * FROM products " . $whereClause;
 
 $result = mysqli_query($conn, $query);
 
