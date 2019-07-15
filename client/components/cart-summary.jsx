@@ -22,10 +22,17 @@ class CartSummary extends React.Component {
     callback(catalog, params);
   }
 
+  setViewCheckout() {
+    let callback = this.props.setView;
+    let checkout = 'checkout';
+    let params = {};
+    callback(checkout, params);
+  }
+
   render() {
     var cartItemArray = this.props.cart;
     var cartItemArrayDisplay = null;
-    if (cartItemArray !== 0) {
+    if (cartItemArray.length !== 0) {
       cartItemArrayDisplay = cartItemArray.map(element => {
         return <CartSummaryItem className="row" key={element.id} cart={element}/>;
       });
@@ -41,8 +48,11 @@ class CartSummary extends React.Component {
           <div>
             {cartItemArrayDisplay}
           </div>
-          <div className="row">
-            <h2 className="col text-right mt-3">Item Total ${this.getCartTotal()}</h2>
+          <div className="row align-items-center">
+            <h2 className="col text-left mt-3">Cart Total ${this.getCartTotal()}</h2>
+            <div className="col text-right ">
+              <button onClick={this.setViewCheckout.bind(this)} className="btn btn-primary">Checkout</button>
+            </div>
           </div>
         </div>
       );
