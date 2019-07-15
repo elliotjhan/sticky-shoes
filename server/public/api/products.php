@@ -15,6 +15,9 @@ if(empty($_GET['id'])) {
     $whereClause = "";
 } else {
     $id = $_GET['id'];
+    if(!is_numeric($id)) {
+        throw new Exception('id needs to be a number');
+    }
     $whereClause = "WHERE id = {$id}";
 }
 
@@ -31,6 +34,10 @@ if(!$result) {
 $data = [];
 while($row = mysqli_fetch_assoc($result)) {
     $data[] = $row;
+}
+
+if($data === []) {
+    throw new Exception('Invalid ID:'. $id);
 }
 
 print( json_encode($data));
