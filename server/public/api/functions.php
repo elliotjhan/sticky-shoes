@@ -1,11 +1,12 @@
 <?php
 
 function error_handler($error) {
+    http_response_code(500);
     $output = [
         'success'=> false,
-        'error'=> getMessage()   
+        'error'=> $error->getMessage()   
     ];
-    $json_output = $error->json_encode($output);
+    $json_output = json_encode($output);
     print($json_output);
 }
 

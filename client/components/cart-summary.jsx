@@ -54,6 +54,7 @@ class CartSummary extends React.Component {
               <button onClick={this.setViewCheckout.bind(this)} className="btn btn-primary">Checkout</button>
             </div>
           </div>
+          <br/>
         </div>
       );
     } else {
