@@ -36,13 +36,14 @@ class ProductDetails extends React.Component {
   }
 
   numberWithCommas(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    let newNumber = parseFloat(number);
+    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   render() {
 
     if (this.state.product !== null) {
-      let product = this.state.product;
+      let product = this.state.product[0];
       let imageUrl = product.image;
       const style = {
         backgroundImage: `url(${imageUrl})`,
