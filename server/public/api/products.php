@@ -39,8 +39,11 @@ while($row = mysqli_fetch_assoc($result)) {
 if($data === []) {
     throw new Exception('Invalid ID:'. $id);
 }
-
-print( json_encode($data));
+if(count($data) === 1) {
+    print(json_encode($data[0]));
+} else {
+    print( json_encode($data));
+}
 
 // doStuff()
 // $output = file_get_contents('dummy-products-list.json');

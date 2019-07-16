@@ -32,7 +32,7 @@ class ProductDetails extends React.Component {
 
   addToCart() {
     let addCartCallback = this.props.addToCart; // add to cart method passed in from app.jsx
-    addCartCallback(this.state.product[0]);
+    addCartCallback(this.state.product);
   }
 
   numberWithCommas(number) { // regex method to put in commas at thousands places
@@ -43,7 +43,7 @@ class ProductDetails extends React.Component {
   render() {
 
     if (this.state.product !== null) {
-      let product = this.state.product[0]; // index 0 because product comes in as an array with one element
+      let product = this.state.product; // index 0 because product comes in as an array with one element
       let imageUrl = product.image;
       const style = {
         backgroundImage: `url(${imageUrl})`,

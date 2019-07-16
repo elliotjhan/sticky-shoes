@@ -20,13 +20,13 @@ class CheckoutForm extends React.Component {
   getCartTotal() {
     let cartTotal = null;
     this.props.cart.forEach(element => {
-      cartTotal += parseFloat(element.price);
+      cartTotal += parseFloat(element.price); // using the array forEach method to get the total amount of all prices
     });
     return this.numberWithCommas(cartTotal);
   }
 
   handleInput(event) {
-    let value = event.target.value;
+    let value = event.target.value; // this updates state as the user types in their input through onChange
     let name = event.target.name;
     this.setState({
       [name]: value
@@ -34,7 +34,7 @@ class CheckoutForm extends React.Component {
   }
 
   handlePlaceOrder() {
-    let placeOrder = this.props.placeOrder;
+    let placeOrder = this.props.placeOrder; // callback function goes back to app.jsx with the credit card info etc
     placeOrder(this.state);
   }
 
