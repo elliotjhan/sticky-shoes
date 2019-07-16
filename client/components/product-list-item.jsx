@@ -10,7 +10,8 @@ class ProductListItem extends React.Component {
   }
 
   numberWithCommas(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    let newNumber = (parseFloat(number) / 100).toFixed(2);
+    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   render() {
