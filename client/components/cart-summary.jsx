@@ -4,27 +4,28 @@ import CartSummaryItem from './cart-summary-item';
 class CartSummary extends React.Component {
 
   numberWithCommas(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    let newNumber = (parseFloat(number) / 100).toFixed(2);
+    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   getCartTotal() {
     let cartTotal = null;
     this.props.cart.forEach(element => {
-      cartTotal += element.price;
+      cartTotal += parseFloat(element.price);
     });
     return this.numberWithCommas(cartTotal);
   }
 
-  setViewCallback() {
+  setViewCallback() { // callback function that toggles what the mainpage will display.
     let callback = this.props.setView;
-    let catalog = 'catalog';
+    let catalog = 'catalog'; // putting in catalog will make the react render back to main page which is catalog
     let params = {};
     callback(catalog, params);
   }
 
   setViewCheckout() {
     let callback = this.props.setView;
-    let checkout = 'checkout';
+    let checkout = 'checkout'; // callback function to set the page to the checkout page
     let params = {};
     callback(checkout, params);
   }

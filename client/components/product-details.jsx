@@ -31,18 +31,19 @@ class ProductDetails extends React.Component {
   }
 
   addToCart() {
-    let addCartCallback = this.props.addToCart;
+    let addCartCallback = this.props.addToCart; // add to cart method passed in from app.jsx
     addCartCallback(this.state.product);
   }
 
-  numberWithCommas(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  numberWithCommas(number) { // regex method to put in commas at thousands places
+    let newNumber = (parseFloat(number) / 100).toFixed(2);
+    return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   render() {
 
     if (this.state.product !== null) {
-      let product = this.state.product;
+      let product = this.state.product; // index 0 because product comes in as an array with one element
       let imageUrl = product.image;
       const style = {
         backgroundImage: `url(${imageUrl})`,

@@ -11,9 +11,19 @@ require_once('functions.php');
 set_exception_handler('error_handler');
 startup();
 
+if(empty($_GET['id'])) {
+    $whereClause = "";
+} else {
+    $id = $_GET['id'];
+    if(!is_numeric($id)) {
+        throw new Exception('id needs to be a number');
+    }
+    $whereClause = "WHERE id = {$id}";
+}
+
 require_once('db_connection.php');
 
-$query = "SELECT * FROM products";
+$query = "SELECT * FROM products " . $whereClause;
 
 $result = mysqli_query($conn, $query);
 
@@ -26,7 +36,14 @@ while($row = mysqli_fetch_assoc($result)) {
     $data[] = $row;
 }
 
-print( json_encode($data));
+if($data === []) {
+    throw new Exception('Invalid ID:'. $id);
+}
+if(count($data) === 1) {
+    print(json_encode($data[0]));
+} else {
+    print( json_encode($data));
+}
 
 // doStuff()
 // $output = file_get_contents('dummy-products-list.json');
