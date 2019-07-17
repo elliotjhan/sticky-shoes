@@ -1,6 +1,6 @@
 <?php
 
-function error_handler($error) {
+function error_handler($error) { 
     http_response_code(500);
     $output = [
         'success'=> false,

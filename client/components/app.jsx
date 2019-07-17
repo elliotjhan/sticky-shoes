@@ -39,7 +39,7 @@ class App extends React.Component {
       });
   }
 
-  setView(name, params) {
+  setView(name, params) { // main method to render the different pages based on key words catalog, details, cart, checkout
     this.setState({
       view: {
         name: name,
@@ -82,7 +82,7 @@ class App extends React.Component {
   }
 
   placeOrder(object) {
-    let currentOrder = this.state.cart.push(object);
+    let currentOrder = this.state.cart.push(object); // object in this case is the name, credit card, and address
     fetch('/api/orders.php', {
       method: 'POST',
       body: JSON.stringify(currentOrder),
@@ -93,7 +93,7 @@ class App extends React.Component {
       .catch(error => {
         console.error('Post Error: ', error);
       });
-    this.setState({
+    this.setState({ // changes display back to main page after order is placed
       view: {
         name: 'catalog',
         params: {}

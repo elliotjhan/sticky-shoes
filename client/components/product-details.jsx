@@ -43,7 +43,7 @@ class ProductDetails extends React.Component {
   render() {
 
     if (this.state.product !== null) {
-      let product = this.state.product; // index 0 because product comes in as an array with one element
+      let product = this.state.product;
       let imageUrl = product.image;
       const style = {
         backgroundImage: `url(${imageUrl})`,
@@ -52,7 +52,7 @@ class ProductDetails extends React.Component {
         backgroundRepeat: 'no-repeat'
       };
       return (
-        <div className="container mt-5 border border-primary p-4">
+        <div className="container mt-4 border border-primary p-4">
           <div onClick={this.setViewCallback.bind(this)} className="cursor row mb-4">
             <div className="col text-secondary">&lt;Back to catalog</div>
           </div>
