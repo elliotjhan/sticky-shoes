@@ -22,7 +22,11 @@ if(empty($_GET['id'])) { // $_GET is an array of variable names/values sent by h
 
 require_once('db_connection.php'); // our php file with servername, username, password, and port
 
-$query = "SELECT * FROM products " . $whereClause;  // concatenate our whereClause to phpmyadmin query depending if id exists or not
+//$query = "SELECT * FROM products " . $whereClause;  // concatenate our whereClause to phpmyadmin query depending if id exists or not
+$query = "SELECT `products`.`id`, `products`.`name`, `products`.`price`, `products`.`shortDescription`, 
+        `products`.`longDescription`, GROUP_CONCAT(`images`.`url`) AS image FROM `products` 
+        JOIN `images` ON `products`.`id` = `images`.`productID` WHERE `products`.`id` = `images`.`productID` 
+        GROUP BY `products`.`id`" . $whereClause;
 
 $result = mysqli_query($conn, $query); // performs the query against the database. 2 parameters of connection and query
                                         // returns a mysqli_result object, here we assign that to variable $result
@@ -32,6 +36,7 @@ if(!$result) {
 
 $data = [];
 while($row = mysqli_fetch_assoc($result)) {  // mysqli_fetch_assoc iterates through array until data runs out
+    $row['image'] = explode(",", $row['image']); // replaces current value of row[image] which is a long string with the exploded version which splits it into an array
     $data[] = $row;                             // then while tests a falsey value which stops the loop
 }
 
