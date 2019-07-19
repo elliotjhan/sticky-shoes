@@ -16,7 +16,7 @@ if(empty($_GET['id'])) { // $_GET is an array of variable names/values sent by h
     if(!is_numeric($id)) {  // is_numeric, php method to check if the argument is a number
         throw new Exception('id needs to be a number'); // when Exception occurs, following code will not execute.
                                                         // php will try to find catch block, if none then fatal error will occur
-    }
+    }                                                   //
     $whereClause = "WHERE id = {$id}";
 }
 
