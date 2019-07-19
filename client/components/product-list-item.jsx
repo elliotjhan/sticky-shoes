@@ -16,7 +16,7 @@ class ProductListItem extends React.Component {
 
   render() {
     let product = this.props.product;
-    let imageUrl = product.image;
+    let imageUrl = product.image; // url vs image, url is the new image files and image is the old one
 
     const style = {
       backgroundImage: `url(${imageUrl})`,

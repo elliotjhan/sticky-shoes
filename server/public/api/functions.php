@@ -1,10 +1,10 @@
 <?php
 
-function error_handler($error) { 
-    http_response_code(500);
+function error_handler($error, $code=500) { // 200's is all good, 404 server not found, 
+    http_response_code($code); // 500 is default code if there is no argument passed in the $code parameter, 500 is server error
     $output = [
-        'success'=> false,
-        'error'=> $error->getMessage()   
+        'success'=> false, // associative array 
+        'error'=> $error->getMessage()   // -> getMessage() method of $error object
     ];
     $json_output = json_encode($output);
     print($json_output);
