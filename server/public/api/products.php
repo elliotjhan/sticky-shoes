@@ -5,7 +5,7 @@ require_once('functions.php'); // require will produce a fatal error upon failur
                                 // include will only produce a warning and will allow script to run
 
 set_exception_handler('error_handler'); // sets a user-defined exception handler function
-                                        // required. runs function when uncaugt exception occurs
+                                        // required. runs function when uncaught exception occurs
 
 startup(); // function from our functions.php that implements header('content-type:application/json)
 
