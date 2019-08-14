@@ -44,7 +44,7 @@ class ProductDetails extends React.Component {
 
     if (this.state.product !== null) {
       let product = this.state.product;
-      let imageUrl = product.image;
+      let imageUrl = product.image[0];// temporarily set to 0 so image pops up for product details for all items
       const style = {
         backgroundImage: `url(${imageUrl})`,
         backgroundPosition: 'center',

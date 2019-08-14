@@ -10,23 +10,22 @@ set_exception_handler('error_handler'); // sets a user-defined exception handler
 startup(); // function from our functions.php that implements header('content-type:application/json)
 
 if(empty($_GET['id'])) { // $_GET is an array of variable names/values sent by http GET method
-    $whereClause = "";
+    $query = "SELECT `products`.`id`, `products`.`name`, `products`.`price`, `products`.`shortDescription`, 
+        `products`.`longDescription`, GROUP_CONCAT(`images`.`url`) AS image FROM `products` 
+        JOIN `images` ON `products`.`id` = `images`.`productID` WHERE `products`.`id` = `images`.`productID` 
+        GROUP BY `products`.`id`";
 } else {
     $id = $_GET['id'];
     if(!is_numeric($id)) {  // is_numeric, php method to check if the argument is a number
         throw new Exception('id needs to be a number'); // when Exception occurs, following code will not execute.
                                                         // php will try to find catch block, if none then fatal error will occur
     }                                                   //
-    $whereClause = "WHERE id = {$id}";
+    $query = "SELECT `products`.`id`, `products`.`name`, `products`.`price`, `products`.`shortDescription`, 
+        `products`.`longDescription`, GROUP_CONCAT(`images`.`url`) AS image FROM `products` 
+        JOIN `images` ON `products`.`id` = `images`.`productID` WHERE `products`.`id` = {$id} && `images`.`productID` = {$id}";
 }
 
 require_once('db_connection.php'); // our php file with servername, username, password, and port
-
-//$query = "SELECT * FROM products " . $whereClause;  // concatenate our whereClause to phpmyadmin query depending if id exists or not
-$query = "SELECT `products`.`id`, `products`.`name`, `products`.`price`, `products`.`shortDescription`, 
-        `products`.`longDescription`, GROUP_CONCAT(`images`.`url`) AS image FROM `products` 
-        JOIN `images` ON `products`.`id` = `images`.`productID` WHERE `products`.`id` = `images`.`productID` 
-        GROUP BY `products`.`id`" . $whereClause;
 
 $result = mysqli_query($conn, $query); // performs the query against the database. 2 parameters of connection and query
                                         // returns a mysqli_result object, here we assign that to variable $result
