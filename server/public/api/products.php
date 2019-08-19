@@ -30,8 +30,6 @@ if(empty($_GET['id'])) { // $_GET is an array of variable names/values sent by h
 
 require_once('db_connection.php'); // our php file with servername, username, password, and port
 
-//$query = "SELECT * FROM products " . $whereClause;  // concatenate our whereClause to phpmyadmin query depending if id exists or not
-
 $result = mysqli_query($conn, $query); // performs the query against the database. 2 parameters of connection and query
                                         // returns a mysqli_result object, here we assign that to variable $result
 if(!$result) {
