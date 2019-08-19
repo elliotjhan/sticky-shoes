@@ -15,8 +15,8 @@ class Header extends React.Component {
         <div className="row">
           <div className="col-12 col-sm-6 col-md-8 text-left mb-3 mt-3">
             <div className="text-primary display-3">
-              <i className="fas fa-sleigh sleigh mr-3"></i>
-                            Santa&#39;s Goodies
+              <i className="fas fa-mountain mountain mr-3"></i>
+                            Sticky Shoes
             </div>
           </div>
           <div className="col-6 col-md-4 text-right mt-3">
