@@ -2,7 +2,7 @@
     height: 20vh;
 }
 .mountain {
-    color: black;
+    color: white;
 }
 .productItem {
     height: 30vh;
@@ -12,4 +12,13 @@
 }
 .checkout {
     width: 50vw;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+    background-image: url(./images/wallpaper.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
