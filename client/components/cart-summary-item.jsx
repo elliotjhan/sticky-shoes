@@ -1,10 +1,15 @@
 import React from 'react';
+// import Quantity from './quantity';
 
 class CartSummaryItem extends React.Component {
 
   numberWithCommas(number) {
     let newNumber = (parseFloat(number) / 100).toFixed(2);
     return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  handleDeleteCallback() {
+    this.props.delete(this.props.cart);
   }
 
   render() {
@@ -21,8 +26,8 @@ class CartSummaryItem extends React.Component {
           <div className="col productItem" style={style}></div>
           <div className="text-left col-sm-6 mt-3">
             <div className="display-3 text-left">{product.name}</div><br/>
-            <h3 className="font-weight-bold text-left">${this.numberWithCommas(product.price)}</h3><br/>
-            <div className="font-italic text-left">{product.shortDescription}</div>
+            <h3 className="font-weight-bold text-left">${this.numberWithCommas(product.price)}</h3>
+            <button onClick={this.handleDeleteCallback.bind(this)} className="btn btn-primary">Delete</button>
           </div>
         </div>
       </div>
