@@ -26,13 +26,15 @@ class ProductListItem extends React.Component {
     };
 
     return (
-
-      <div onClick={this.setViewCallback.bind(this)} className="col-4 mx-auto cursor catalogItem">
-        <div className="m-1 mb-4 border border-primary p-3">
-          <div className="productImage mx-auto d-block" style={style}></div>
-          <div className="text-center font-weight-bold">{product.name}</div>
-          <div className="text-center">${this.numberWithCommas(product.price)}</div>
-          <div className="text-center font-italic">{product.shortDescription}</div>
+      <div className="col-lg-3 col-sm-12 px-0 catalogItem text-center">
+        <div className="text-center card">
+          <div className="productImage card-img-top" style={style}>
+          </div>
+          <div className="productInfo card-body">
+            <div className="font-weight-bold productName">{product.name}</div>
+            <div className="productPrice">${this.numberWithCommas(product.price)}</div>
+            <button className="btn btn-info mt-3 moreInfoButton" onClick={this.setViewCallback.bind(this)}>More Info</button>
+          </div>
         </div>
       </div>
 

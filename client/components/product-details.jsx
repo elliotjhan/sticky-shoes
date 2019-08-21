@@ -74,7 +74,7 @@ class ProductDetails extends React.Component {
         backgroundRepeat: 'no-repeat'
       };
       return (
-        <div className="container mt-4 border border-primary p-4">
+        <div className="container p-4 catalogItem">
           <div onClick={this.setViewCallback.bind(this)} className="cursor row mb-4">
             <div className="col text-secondary">&lt;Back to catalog</div>
           </div>
