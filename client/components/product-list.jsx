@@ -13,7 +13,7 @@ class ProductList extends React.Component {
     });
 
     return (
-      <div className="container-fluid">
+      <div className="catalogBody container-fluid">
         <div className="row">{eachProductList}</div>
       </div>
     );
