@@ -4,6 +4,7 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import LandingPage from './landing-page';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends React.Component {
     this.state = {
       products: [],
       view: {
-        name: 'catalog',
+        name: 'landingPage',
         params: {}
       },
       cart: []
@@ -131,6 +132,12 @@ class App extends React.Component {
         <div>
           <Header cartLength={this.state.cart.length} setView={this.setView}/>
           <CheckoutForm cart={this.state.cart} setView={this.setView} placeOrder={this.placeOrder}/>
+        </div>
+      );
+    } else if (currentView.name === 'landingPage') {
+      return (
+        <div>
+          <LandingPage setView={this.setView} />
         </div>
       );
     }
