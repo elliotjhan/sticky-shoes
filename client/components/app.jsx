@@ -20,6 +20,7 @@ class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.deleteFromCart = this.deleteFromCart.bind(this);
   }
 
   componentDidMount() {
@@ -64,9 +65,11 @@ class App extends React.Component {
       });
   }
 
-  addToCart(product) {
+  addToCart(product, quantity) {
     let cartArray = this.state.cart;
-    cartArray.push(product);
+    for (let i = 0; i < quantity; i++) {
+      cartArray.push(product);
+    }
     this.setState({
       cart: cartArray
     }, this.getCartTotal);
@@ -80,6 +83,15 @@ class App extends React.Component {
       .catch(error => {
         console.error('Post Error: ', error);
       });
+  }
+
+  deleteFromCart(element) {
+    let index = this.state.cart.indexOf(element);
+    let newCart = this.state.cart;
+    newCart.splice(index, 1);
+    this.setState({
+      cart: newCart
+    });
   }
 
   placeOrder(object) {
@@ -124,7 +136,7 @@ class App extends React.Component {
       return (
         <div>
           <Header cartLength={this.state.cart.length} setView={this.setView}/>
-          <CartSummary setView={this.setView} cart={this.state.cart}/>
+          <CartSummary delete={this.deleteFromCart} setView={this.setView} cart={this.state.cart}/>
         </div>
       );
     } else if (currentView.name === 'checkout') {

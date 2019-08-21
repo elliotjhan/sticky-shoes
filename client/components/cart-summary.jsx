@@ -31,11 +31,11 @@ class CartSummary extends React.Component {
   }
 
   render() {
-    var cartItemArray = this.props.cart;
-    var cartItemArrayDisplay = null;
+    let cartItemArray = this.props.cart;
+    let cartItemArrayDisplay = null;
     if (cartItemArray.length !== 0) {
       cartItemArrayDisplay = cartItemArray.map(element => {
-        return <CartSummaryItem className="row" key={element.id} cart={element}/>;
+        return <CartSummaryItem delete={this.props.delete} className="row" key={element.id} cart={element} />;
       });
     }
 
