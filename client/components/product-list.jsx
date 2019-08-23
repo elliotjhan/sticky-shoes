@@ -15,7 +15,7 @@ class ProductList extends React.Component {
     return (
       <div className="catalogBody container-fluid">
         <div className="row banner mb-1"></div>
-        <div className="row justify-content-center">{eachProductList}</div>
+        <div className="row justify-content-center productListContainer">{eachProductList}</div>
       </div>
     );
   }
