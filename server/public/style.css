@@ -6,6 +6,10 @@ body {
     height: 100vh;
     width: 100vw;
 }
+.siteInfo {
+    font-size: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+}
 .disclaimer {
     position: fixed;
     bottom:0;

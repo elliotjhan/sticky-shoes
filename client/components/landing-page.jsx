@@ -19,7 +19,7 @@ class LandingPage extends React.Component {
           </div>
           <br/>
           <div className="row">
-            <div className="col-8">
+            <div className="col-8 siteInfo">
                             Welcome to Sticky Shoes! This is your one stop destination for all your rock climbing shoe needs.
                             No need to navigate from site to site. We here at Sticky Shoes co, have compiled the greatest and
                             hottest climbing shoes on the market.
