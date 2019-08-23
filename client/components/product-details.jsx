@@ -74,13 +74,13 @@ class ProductDetails extends React.Component {
         backgroundRepeat: 'no-repeat'
       };
       return (
-        <div className="container p-4 catalogItem">
+        <div className="container p-4 catalogItem my-5">
           <div onClick={this.setViewCallback.bind(this)} className="cursor row mb-4">
-            <div className="col text-secondary">&lt;Back to catalog</div>
+            <div className="col text-dark">&lt;Back to catalog</div>
           </div>
           <div className="row mt-4">
-            <div className="col productItem" style={style}></div>
-            <div className="text-center col-sm-6 mt-3">
+            <div className="col-lg-6 productItem" style={style}></div>
+            <div className="text-center col-lg-6 mt-3">
               <div className="display-3">{product.name}</div><br/>
               <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3><br/>
               <div className="font-italic">{product.shortDescription}</div><br/>

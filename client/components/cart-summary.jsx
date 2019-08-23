@@ -41,16 +41,16 @@ class CartSummary extends React.Component {
 
     if (cartItemArrayDisplay !== null) {
       return (
-        <div className="container">
-          <div onClick={this.setViewCallback.bind(this)} className="cursor row text-secondary">&lt;Back to Catalog</div><br/>
+        <div className="container cartContainer">
+          <div onClick={this.setViewCallback.bind(this)} className="cursor row text-dark">&lt;Back to Catalog</div><br/>
           <div className="display-4 row">
-            <div className="col">My Goodies:</div>
+            <div className="col">Cart Summary:</div>
           </div>
           <div>
             {cartItemArrayDisplay}
           </div>
           <div className="row align-items-center">
-            <h2 className="col text-left mt-3">Cart Total ${this.getCartTotal()}</h2>
+            <h2 className="col text-left mt-3">Cart Total: ${this.getCartTotal()}</h2>
             <div className="col text-right ">
               <button onClick={this.setViewCheckout.bind(this)} className="btn btn-primary">Checkout</button>
             </div>

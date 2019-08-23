@@ -6,6 +6,13 @@ body {
     height: 100vh;
     width: 100vw;
 }
+.disclaimer {
+    position: fixed;
+    bottom:0;
+    right: 0;
+    width:100%;
+    color: rgb(255, 255, 255);
+}
 .headerContainer {
     background-color: black;
 }
@@ -18,13 +25,14 @@ body {
 .headerIcon {
     background-image: url(./images/mountain_logo3.png);
     height: 100px;
-    width: 150px;
+    width: 170px;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
     display: inline-block;
     cursor: pointer;
+    margin-bottom: 2vh;
 }
 .headerTitle {
     font-family: 'Expletus Sans', cursive;
@@ -69,13 +77,13 @@ body {
     background-color: black;
 }
 .catalogItem {
-    background-color: rgb(228, 228, 228);
+    background-color: #f1f1f1;
     border: 5px solid black;
     border-radius: 7px;
 }
 .productImage {
     height: 300px;
-    background-color: rgb(228, 228, 228);
+    background-color: #f1f1f1;
 }
 .productInfo {
     background-color: white;
@@ -89,7 +97,7 @@ body {
     font-size: 1.4rem;
 }
 .productItem {
-    height: 30vh;
+    height: 50vh;
 }
 .mountain {
     color: black;
@@ -98,13 +106,26 @@ body {
     font-family: 'Roboto Condensed', sans-serif;
     width: 17vw;
 }
-.disclaimer {
-    position: fixed;
-    bottom:0;
-    right: 0;
-    width:100%;
-    color: rgb(255, 255, 255);
+.productListContainer > div:nth-child(1),
+.productListContainer > div:nth-child(5),
+.productListContainer > div:nth-child(9) {
+    border-left: none;
 }
+.productListContainer > div:nth-child(4),
+.productListContainer > div:nth-child(8),
+.productListContainer > div:nth-child(12) {
+    border-right: none;
+}
+
+.cartContainer {
+    background-color: rgb(255, 255, 255);
+    border: 5px solid black;
+    border-radius: 7px;
+}
+
+
+
+
 
 
 /* Quantity Incrementor */
