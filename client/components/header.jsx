@@ -28,11 +28,11 @@ class Header extends React.Component {
             </div>
           </div>
           <div className="col-6 col-md-4 text-right mt-3">
-            <i onClick={this.handleCartClick.bind(this)} className="cursor fas fa-shopping-cart display-4 mr-5 mt-3 text-white">
-              <span>
-                <small> {this.props.cartLength}</small>
-              </span>
-            </i>
+            <div onClick={this.handleCartClick.bind(this)} className="cursor text-white shoppingCart">
+              <div className="cartLength">
+                {this.props.cartLength}
+              </div>
+            </div>
           </div>
         </div>
       </div>
