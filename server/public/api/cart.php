@@ -1,9 +1,9 @@
 <?php
 
-header('Content-Type: application/json');
 define('INTERNAL', true);
 require_once('functions.php');
 session_start();
+startup();
 set_exception_handler('error_handler');
 require_once('db_connection.php');
 
