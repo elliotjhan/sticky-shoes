@@ -26,11 +26,11 @@ if(!$result) {
     throw new Exception('error with query: '. mysqli_error($conn)); // if $result is undefined, throw exception
 }      
 
-$data = [];
+$productData = [];
 while($row = mysqli_fetch_assoc($result)) {  // mysqli_fetch_assoc iterates through array until data runs out
-    $data[] = $row;                             // then while tests a falsey value which stops the loop
+    $productData[] = $row;                             // then while tests a falsey value which stops the loop
 }
-if($data === []) { // if query id does not exist, result will not return anything. So this tests if the id is invalid
+if($productData === []) { // if query id does not exist, result will not return anything. So this tests if the id is invalid
     throw new Exception('Invalid ID:'. $id);
 }
 
