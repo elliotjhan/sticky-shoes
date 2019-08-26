@@ -18,14 +18,13 @@ if(empty($_GET['id'])) { // $_GET is an array of variable names/values sent by h
     $id = $_GET['id'];
     if(!is_numeric($id)) {  // is_numeric, php method to check if the argument is a number
         throw new Exception('id needs to be a number'); // when Exception occurs, following code will not execute.
-                                                        // php will try to find catch block, if none then fatal error will occur
+        // php will try to find catch block, if none then fatal error will occur
     }  
-    $query = "SELECT * FROM `products` WHERE id = {$id}";
-    // $query = "SELECT `products`.`id`, `products`.`name`, `products`.`price`, `products`.`shortDescription`, 
-    //     `products`.`longDescription`, GROUP_CONCAT(`images`.`url`) AS image FROM `products` 
-    //     JOIN `images` ON `products`.`id` = `images`.`productID` WHERE `products`.`id` = `images`.`productID` 
-    //     GROUP BY `products`.`id`";                                                 
-    // $whereClause = " WHERE id = {$id}";
+    $query = "SELECT `products`.`id`, `products`.`name`, `products`.`price`, `products`.`shortDescription`, 
+        `products`.`longDescription`, GROUP_CONCAT(`images`.`url`) AS image FROM `products` 
+        JOIN `images` ON `products`.`id` = `images`.`productID` WHERE `products`.`id` = `images`.`productID`
+        && `products`.`id` = {$id} GROUP BY `products`.`id`";
+        // concatenate the $id into the where clause
 }
 
 require_once('db_connection.php'); // our php file with servername, username, password, and port
