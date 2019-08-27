@@ -28,6 +28,12 @@ class ProductDetails extends React.Component {
       });
   }
 
+  resetQuantity() {
+    this.setState({
+      quantity: 1
+    });
+  }
+
   setViewCallback() {
     let callback = this.props.setView;
     let catalog = 'catalog';
@@ -39,6 +45,7 @@ class ProductDetails extends React.Component {
     let product = this.state.product;
     let quantity = this.state.quantity;
     addCartCallback(product, quantity);
+    this.props.getCartItems();
   }
 
   numberWithCommas(number) { // regex method to put in commas at thousands places

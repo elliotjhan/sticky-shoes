@@ -7,6 +7,7 @@ class Header extends React.Component {
     let cart = 'cart';
     let params = {};
     callback(cart, params);
+    this.props.getCartItems();
   }
 
   handleLandingPageViewClick() {

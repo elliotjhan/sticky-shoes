@@ -66,7 +66,7 @@ if($cartID === false) {
 
 $cartItemQuery = "INSERT INTO `cartItems` SET `cartItems`.`count` = {$count}, `cartItems`.`productID` = {$id}, 
                 `cartItems`.`price` = {$price}, `cartItems`.`added` = NOW(), `cartItems`.`cartID` = {$cartID} 
-                ON DUPLICATE KEY UPDATE `cartItems`.`count` = `cartItems`.`count` + `cartItems`.`count`";
+                ON DUPLICATE KEY UPDATE `cartItems`.`count` = `cartItems`.`count` + {$count}";
 
 $result4 = mysqli_query($conn, $cartItemQuery);
 if(!$result4) {
