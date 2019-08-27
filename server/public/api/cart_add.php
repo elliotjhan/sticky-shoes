@@ -15,7 +15,15 @@ if($jsonBody->id) {
     if(intval($id) < 1) {
         throw new Exception('id must be greater than 0');
     }
+    if(gettype($id) !== "integer") {
+        throw new Exception('id must be a number');
+    }
+} else {
+    throw new Exception('id required to add to cart');
 } 
+if($jsonBody->count) {
+    $count = $jsonBody->count;
+}
 
 if(empty($_SESSION['cartId'])) {
     $cartID = false;
@@ -56,9 +64,9 @@ if($cartID === false) {
     $_SESSION['cartId'] = $cartID; 
 } 
 
-$cartItemQuery = "INSERT INTO `cartItems` SET `cartItems`.`count` = 1, `cartItems`.`productID` = {$id}, 
+$cartItemQuery = "INSERT INTO `cartItems` SET `cartItems`.`count` = {$count}, `cartItems`.`productID` = {$id}, 
                 `cartItems`.`price` = {$price}, `cartItems`.`added` = NOW(), `cartItems`.`cartID` = {$cartID} 
-                ON DUPLICATE KEY UPDATE `cartItems`.`count` = `cartItems`.`count` + 1";
+                ON DUPLICATE KEY UPDATE `cartItems`.`count` = `cartItems`.`count` + `cartItems`.`count`";
 
 $result4 = mysqli_query($conn, $cartItemQuery);
 if(!$result4) {

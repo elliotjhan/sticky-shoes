@@ -14,7 +14,7 @@ if(empty($_SESSION['cartId'])) {
     $cartId = intval($_SESSION['cartId']);
 }
 
-$query = "SELECT `cartItems`.`price`, `cartItems`.`count`, `products`.`name`, `products`.`image` 
+$query = "SELECT `cartItems`.`price`, `cartItems`.`count`, `products`.`name`, `products`.`image`, `products`.`id` 
         FROM `cartItems`
         INNER JOIN `products` ON `cartItems`.`productID` = `products`.`id`";
 

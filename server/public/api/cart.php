@@ -9,7 +9,7 @@ require_once('db_connection.php');
 
 
 $method = $_SERVER['REQUEST_METHOD'];
-$item = file_get_contents('php://input');
+//$item = file_get_contents('php://input');
 
 if ($method == 'GET') {
   require_once('cart_get.php');
