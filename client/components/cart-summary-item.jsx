@@ -1,5 +1,5 @@
 import React from 'react';
-// import Quantity from './quantity';
+import Quantity from './quantity';
 
 class CartSummaryItem extends React.Component {
 
@@ -27,7 +27,8 @@ class CartSummaryItem extends React.Component {
           <div className="text-left col-sm-6 mt-3 text-center">
             <div className="display-4">{product.name}</div><br/>
             <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3>
-            <button onClick={this.handleDeleteCallback.bind(this)} className="btn btn-primary">Delete</button>
+            <Quantity quantity={this.props.count}/>
+            <button onClick={this.handleDeleteCallback.bind(this)} className="btn btn-primary">Update</button>
           </div>
         </div>
       </div>

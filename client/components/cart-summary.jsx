@@ -3,6 +3,10 @@ import CartSummaryItem from './cart-summary-item';
 
 class CartSummary extends React.Component {
 
+  // componentDidMount() {
+  //   this.props.getCartItems();
+  // }
+
   numberWithCommas(number) {
     let newNumber = (parseFloat(number) / 100).toFixed(2);
     return newNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -11,7 +15,7 @@ class CartSummary extends React.Component {
   getCartTotal() {
     let cartTotal = null;
     this.props.cart.forEach(element => {
-      cartTotal += parseFloat(element.price);
+      cartTotal += parseFloat(element.price * element.count);
     });
     return this.numberWithCommas(cartTotal);
   }
@@ -35,7 +39,7 @@ class CartSummary extends React.Component {
     let cartItemArrayDisplay = null;
     if (cartItemArray.length !== 0) {
       cartItemArrayDisplay = cartItemArray.map(element => {
-        return <CartSummaryItem delete={this.props.delete} className="row" key={element.id} cart={element} />;
+        return <CartSummaryItem count={element.count} delete={this.props.delete} className="row" key={element.id} cart={element} />;
       });
     }
 

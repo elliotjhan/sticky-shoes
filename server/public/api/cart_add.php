@@ -1,9 +1,6 @@
 <?php
-require_once('functions.php');
-set_exception_handler('error_handler');
-header("Content-type:application/json");
-require_once('db_connection.php');
 
+require_once('functions.php');
 
 if(!INTERNAL) {
     print("Direct access not allowed");
@@ -18,7 +15,15 @@ if($jsonBody->id) {
     if(intval($id) < 1) {
         throw new Exception('id must be greater than 0');
     }
+    if(gettype($id) !== "integer") {
+        throw new Exception('id must be a number');
+    }
+} else {
+    throw new Exception('id required to add to cart');
 } 
+if($jsonBody->count) {
+    $count = $jsonBody->count;
+}
 
 if(empty($_SESSION['cartId'])) {
     $cartID = false;
@@ -35,7 +40,7 @@ if(!$result) {
 $productData = [];
 while($row = mysqli_fetch_assoc($result)) {  // mysqli_fetch_assoc iterates through array until data runs out
     $productData[] = $row;    
-    $price = $productData[0]['price'];                         // then while tests a falsey value which stops the loop
+    $price = $productData[0]['price'];  // associative array inside associative array in $price
 }
 if($productData === []) { // if query id does not exist, result will not return anything. So this tests if the id is invalid
     throw new Exception('Invalid ID:'. $id);
@@ -55,15 +60,13 @@ if($cartID === false) {
     if(mysqli_affected_rows($conn) !== 1) {
         throw new Exception('affected rows should only be 1');
     }
+    $cartID = mysqli_insert_id($conn);
+    $_SESSION['cartId'] = $cartID; 
 } 
 
-$currentId = mysqli_insert_id($conn);
-$cartID = $currentId;
-$_SESSION['cartId'] = $currentId; 
-
-$cartItemQuery = "INSERT INTO `cartItems` SET `cartItems`.`count` = 1, `cartItems`.`productID` = {$id}, 
+$cartItemQuery = "INSERT INTO `cartItems` SET `cartItems`.`count` = {$count}, `cartItems`.`productID` = {$id}, 
                 `cartItems`.`price` = {$price}, `cartItems`.`added` = NOW(), `cartItems`.`cartID` = {$cartID} 
-                ON DUPLICATE KEY UPDATE `cartItems`.`count` = `cartItems`.`count` + 1";
+                ON DUPLICATE KEY UPDATE `cartItems`.`count` = `cartItems`.`count` + `cartItems`.`count`";
 
 $result4 = mysqli_query($conn, $cartItemQuery);
 if(!$result4) {
