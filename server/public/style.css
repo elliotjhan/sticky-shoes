@@ -18,7 +18,7 @@ body {
     color: rgb(255, 255, 255);
 }
 .headerContainer {
-    background-color: black;
+    background-image: linear-gradient(to right, rgb(17, 17, 17), rgb(41, 41, 41));
 }
 .shoppingCart {
     background-image: url(./images/cart.png);
