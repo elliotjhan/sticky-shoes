@@ -25,7 +25,7 @@ class CartSummaryItem extends React.Component {
         <div className="row mt-3">
           <div className="col productItem" style={style}></div>
           <div className="text-left col-sm-6 mt-3 text-center">
-            <div className="display-4">{product.name}</div><br/>
+            <div className="display-4 cartProductName">{product.name}</div><br/>
             <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3>
             <Quantity quantity={this.props.count}/>
             <button onClick={this.handleDeleteCallback.bind(this)} className="btn btn-primary">Update</button>

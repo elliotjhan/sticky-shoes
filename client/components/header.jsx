@@ -7,6 +7,7 @@ class Header extends React.Component {
     let cart = 'cart';
     let params = {};
     callback(cart, params);
+    this.props.getCartItems();
   }
 
   handleLandingPageViewClick() {
@@ -19,19 +20,19 @@ class Header extends React.Component {
   render() {
     return (
       <div className="container-fluid headerContainer">
-        <div className="row">
-          <div className="col-12 col-sm-6 col-md-8 text-left mb-3 mt-3">
+        <div className="row headerRow">
+          <div className="col-lg-8 col-md-8 col-sm-8 text-left mb-3 mt-3 headerTitleContainer">
             <div className="headerTitle display-3">
               <div onClick={this.handleLandingPageViewClick.bind(this)} className="headerIcon align-middle mr-3">
               </div>
                 Sticky Shoes
             </div>
           </div>
-          <div className="col-6 col-md-4 text-right mt-3">
+          <div className="col-lg-4 col-md-4 col-sm-4 text-right mt-3 headerCartContainer">
+            <div className="cartLength">
+              {this.props.cartLength}
+            </div>
             <div onClick={this.handleCartClick.bind(this)} className="cursor text-white shoppingCart">
-              <div className="cartLength">
-                {this.props.cartLength}
-              </div>
             </div>
           </div>
         </div>

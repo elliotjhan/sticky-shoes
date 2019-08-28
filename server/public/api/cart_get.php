@@ -34,7 +34,7 @@ if($data === []) { // if query id does not exist, result will not return anythin
 }
 
 if(count($data) === 1) {
-    print(json_encode($data[0])); // index 0 because this returns an array with one object inside
+    print(json_encode($data)); // index 0 because this returns an array with one object inside
 } else {
     print(json_encode($data));
 }

@@ -49,8 +49,8 @@ class CheckoutForm extends React.Component {
     return (
       <div className="container mt-3 checkout">
         <div className="row">
-          <div className="col">
-            <div className="display-4">Checkout</div>
+          <div className="col col-sm-12">
+            <div className="display-4 checkoutTitle">Checkout</div>
                         Order Total: ${this.getCartTotal()}
           </div>
         </div>

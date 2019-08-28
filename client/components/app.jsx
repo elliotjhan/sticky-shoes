@@ -82,16 +82,12 @@ class App extends React.Component {
   }
 
   addToCart(product, quantity) {
-    // let cartArray = this.state.cart;
-    // for (let i = 0; i < quantity; i++) {
-    //   cartArray.push(product);
-    // }
-    // this.setState({
-    //   cart: cartArray
-    // }, this.getCartTotal);
     fetch('/api/cart.php', {
       method: 'POST',
-      body: JSON.stringify(product),
+      body: JSON.stringify({
+        id: parseInt(product.id),
+        count: quantity
+      }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -137,28 +133,28 @@ class App extends React.Component {
     if (currentView.name === 'details') {
       return (
         <div>
-          <Header cartLength={this.state.cartLength} setView={this.setView}/>
-          <ProductDetails addToCart={this.addToCart} setView={this.setView} id={clickedId}/>
+          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
+          <ProductDetails getCartItems={this.getCartItems} addToCart={this.addToCart} setView={this.setView} id={clickedId}/>
         </div>
       );
     } else if (currentView.name === 'catalog') {
       return (
         <div>
-          <Header cartLength={this.state.cartLength} setView={this.setView}/>
+          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
           <ProductList setView={this.setView} productList={this.state.products}/>
         </div>
       );
     } else if (currentView.name === 'cart') {
       return (
         <div>
-          <Header cartLength={this.state.cartLength} setView={this.setView}/>
+          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
           <CartSummary delete={this.deleteFromCart} setView={this.setView} cart={this.state.cart} getCartItems={this.getCartItems}/>
         </div>
       );
     } else if (currentView.name === 'checkout') {
       return (
         <div>
-          <Header cartLength={this.state.cartLength} setView={this.setView}/>
+          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
           <CheckoutForm cart={this.state.cart} setView={this.setView} placeOrder={this.placeOrder}/>
         </div>
       );
