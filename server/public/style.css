@@ -29,12 +29,19 @@ body {
     position: absolute;
     right: 0;
     top: 0;
-    margin-right: 40px;
+    margin-right: 60px;
 }
 .cartLength {
     color: white;
     font-size: 2.2vw;
-    margin: 14px 32px 0 0;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    right: 0;
+    margin-top: 20px;
+}
+.headerCartContainer {
+    position: relative;
 }
 .cursor {
     cursor: pointer;
@@ -274,4 +281,59 @@ body {
     .catalogItem {
         margin-top: 0!important;
     }
-  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+
+    .headerIcon {
+        height: 10vh;
+        width: 15vw;
+    }
+    .headerTitle {
+        font-size: 2.5rem;
+    }
+    .headerContainer {
+        height: 14vh;
+    }
+    .shoppingCart {
+        height: 6vh;
+        width: 10vw;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-top: 2vh;
+    }
+    .cartLength {
+        font-size: 1.8rem;
+        margin-top: 2.5vh;
+    }
+    .banner {
+        height: 40vh;
+        background-image: url(./images/banner.png);
+    }
+    .cartContainer {
+        margin-top: 7vh;
+    }
+    .quantity-input__modifier {
+        padding: 0.5rem;
+        width: 2.5rem;
+        font-size: 1rem;
+    }
+    .quantity-input__screen {
+        width: 3rem;
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
+    .cartSummary {
+        font-size: 3rem;
+    }
+    .productItem {
+        height: 40vh;
+    }
+    .productName {
+        font-size: 2.2rem;
+    }
+    .moreInfoButton {
+        width: 30vw;
+    }
+
+}

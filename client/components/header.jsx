@@ -28,7 +28,7 @@ class Header extends React.Component {
                 Sticky Shoes
             </div>
           </div>
-          <div className="col-lg-4 col-md-4 col-sm-4 text-right mt-3 headerCartContainer">
+          <div className="col-lg-4 col-md-4 col-sm-4 mt-3 headerCartContainer">
             <div className="cartLength">
               {this.props.cartLength}
             </div>
