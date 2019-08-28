@@ -1,7 +1,20 @@
 import React from 'react';
-import Quantity from './quantity';
+import QuantityUpdate from './quantityUpdate';
 
 class CartSummaryItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+    this.handleUpdateCallback = this.handleUpdateCallback.bind(this);
+    this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
+  }
+
+  componentDidMount() {
+    this.handleCount();
+  }
 
   numberWithCommas(number) {
     let newNumber = (parseFloat(number) / 100).toFixed(2);
@@ -9,11 +22,40 @@ class CartSummaryItem extends React.Component {
   }
 
   handleDeleteCallback() {
-    this.props.delete(this.props.cart);
+    let product = this.props.product;
+    this.props.delete(product);
+  }
+
+  handleUpdateCallback() {
+    let product = this.props.product;
+    let newCount = this.state.count;
+    this.props.updateCart(product.id, newCount);
+  }
+
+  handleCount() {
+    this.setState({
+      count: this.props.count
+    });
+  }
+
+  increment() {
+    let count = this.state.count;
+    let newCount = ++count;
+    this.setState({
+      count: newCount
+    });
+  }
+
+  decrement() {
+    let count = this.state.count;
+    let newCount = --count;
+    this.setState({
+      count: newCount
+    });
   }
 
   render() {
-    let product = this.props.cart;
+    let product = this.props.product;
     const style = {
       backgroundImage: `url(${product.image})`,
       backgroundPosition: 'center',
@@ -27,8 +69,8 @@ class CartSummaryItem extends React.Component {
           <div className="text-left col-sm-6 mt-3 text-center">
             <div className="display-4 cartProductName">{product.name}</div><br/>
             <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3>
-            <Quantity quantity={this.props.count}/>
-            <button onClick={this.handleDeleteCallback.bind(this)} className="btn btn-primary">Update</button>
+            <QuantityUpdate increment={this.increment} decrement={this.decrement} quantity={this.state.count}/>
+            <button onClick={this.handleUpdateCallback} className="btn btn-primary">Update</button>
           </div>
         </div>
       </div>

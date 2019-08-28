@@ -24,6 +24,7 @@ class App extends React.Component {
     this.deleteFromCart = this.deleteFromCart.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.getCartLength = this.getCartLength.bind(this);
+    this.updateCart = this.updateCart.bind(this);
   }
 
   componentDidMount() {
@@ -97,6 +98,22 @@ class App extends React.Component {
       });
   }
 
+  updateCart(productId, count) {
+    fetch('/api/cart.php', {
+      method: 'PUT',
+      body: JSON.stringify({
+        id: parseInt(productId),
+        newCount: count
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .catch(error => {
+        console.error('Post Error: ', error);
+      });
+  }
+
   deleteFromCart(element) {
     let index = this.state.cart.indexOf(element);
     let newCart = this.state.cart;
@@ -148,7 +165,7 @@ class App extends React.Component {
       return (
         <div>
           <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
-          <CartSummary delete={this.deleteFromCart} setView={this.setView} cart={this.state.cart} getCartItems={this.getCartItems}/>
+          <CartSummary updateCart={this.updateCart} delete={this.deleteFromCart} setView={this.setView} cart={this.state.cart} getCartItems={this.getCartItems}/>
         </div>
       );
     } else if (currentView.name === 'checkout') {

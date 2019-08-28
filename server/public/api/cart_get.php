@@ -15,8 +15,9 @@ if(empty($_SESSION['cartId'])) {
 }
 
 $query = "SELECT `cartItems`.`price`, `cartItems`.`count`, `products`.`name`, `products`.`image`, `products`.`id` 
-        FROM `cartItems`
+        FROM `cartItems` 
         INNER JOIN `products` ON `cartItems`.`productID` = `products`.`id`";
+        // WHERE `cartItems`.`cartID` = {$cartId}
 
 // "SELECT `products`.`id`, `products`.`name`, `products`.`price`, `products`.`shortDescription`, 
 //         `products`.`longDescription`, GROUP_CONCAT(`images`.`url`) AS image FROM `products` 

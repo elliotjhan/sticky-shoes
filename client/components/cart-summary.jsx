@@ -39,7 +39,7 @@ class CartSummary extends React.Component {
     let cartItemArrayDisplay = null;
     if (cartItemArray.length !== 0) {
       cartItemArrayDisplay = cartItemArray.map(element => {
-        return <CartSummaryItem count={element.count} delete={this.props.delete} className="row" key={element.id} cart={element} />;
+        return <CartSummaryItem updateCart={this.props.updateCart} count={element.count} delete={this.props.delete} className="row" key={element.id} product={element} />;
       });
     }
 
