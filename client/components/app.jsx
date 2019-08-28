@@ -140,21 +140,21 @@ class App extends React.Component {
     } else if (currentView.name === 'catalog') {
       return (
         <div>
-          <Header cartLength={this.state.cartLength} setView={this.setView}/>
+          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
           <ProductList setView={this.setView} productList={this.state.products}/>
         </div>
       );
     } else if (currentView.name === 'cart') {
       return (
         <div>
-          <Header cartLength={this.state.cartLength} setView={this.setView}/>
+          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
           <CartSummary delete={this.deleteFromCart} setView={this.setView} cart={this.state.cart} getCartItems={this.getCartItems}/>
         </div>
       );
     } else if (currentView.name === 'checkout') {
       return (
         <div>
-          <Header cartLength={this.state.cartLength} setView={this.setView}/>
+          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
           <CheckoutForm cart={this.state.cart} setView={this.setView} placeOrder={this.placeOrder}/>
         </div>
       );
