@@ -30,6 +30,7 @@ class CartSummaryItem extends React.Component {
     let product = this.props.product;
     let newCount = this.state.count;
     this.props.updateCart(product.id, newCount);
+    this.props.getCartItems();
   }
 
   handleCount() {
