@@ -304,7 +304,7 @@ body {
     }
     .cartLength {
         font-size: 1.8rem;
-        margin-top: 2.5vh;
+        margin-top: 2.6vh;
     }
     .banner {
         height: 40vh;
@@ -335,5 +335,7 @@ body {
     .moreInfoButton {
         width: 30vw;
     }
-
+    .checkout {
+        width: 65vw;
+    }
 }
