@@ -43,7 +43,7 @@ class CartSummary extends React.Component {
           updateCart={this.props.updateCart}
           getCartItems={this.props.getCartItems}
           count={element.count}
-          delete={this.props.delete}
+          deleteFromCart={this.props.deleteFromCart}
           className="row" key={element.id}
           product={element} />;
       });

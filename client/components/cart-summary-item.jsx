@@ -8,6 +8,7 @@ class CartSummaryItem extends React.Component {
       count: 0
     };
     this.handleUpdateCallback = this.handleUpdateCallback.bind(this);
+    this.handleDeleteCallback = this.handleDeleteCallback.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
   }
@@ -23,7 +24,8 @@ class CartSummaryItem extends React.Component {
 
   handleDeleteCallback() {
     let product = this.props.product;
-    this.props.delete(product);
+    this.props.deleteFromCart(product.id);
+    this.props.getCartItems();
   }
 
   handleUpdateCallback() {
@@ -71,7 +73,8 @@ class CartSummaryItem extends React.Component {
             <div className="display-4 cartProductName">{product.name}</div><br/>
             <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3>
             <QuantityUpdate increment={this.increment} decrement={this.decrement} quantity={this.state.count}/>
-            <button onClick={this.handleUpdateCallback} className="btn btn-primary">Update</button>
+            <button onClick={this.handleUpdateCallback} className="btn btn-primary">Update</button><br/>
+            <button onClick={this.handleDeleteCallback} className="btn btn-danger px-3 mt-2">Delete</button>
           </div>
         </div>
       </div>

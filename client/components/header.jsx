@@ -3,18 +3,18 @@ import React from 'react';
 class Header extends React.Component {
 
   handleCartClick() {
-    let callback = this.props.setView;
+    let setViewCallback = this.props.setView;
     let cart = 'cart';
     let params = {};
-    callback(cart, params);
+    setViewCallback(cart, params);
     this.props.getCartItems();
   }
 
   handleLandingPageViewClick() {
-    let callback = this.props.setView;
+    let setViewCallback = this.props.setView;
     let landingPage = 'landingPage';
     let params = {};
-    callback(landingPage, params);
+    setViewCallback(landingPage, params);
   }
 
   render() {

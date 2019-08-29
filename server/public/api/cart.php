@@ -20,6 +20,8 @@ if ($method == 'GET') {
   // print($item);
 } else if ($method == 'PUT') {
   require_once('cart_update.php');
+} else if ($method == 'DELETE') {
+  require_once('cart_delete.php');
 } else {
   http_response_code(404);
   print(json_encode([
