@@ -32,11 +32,9 @@ while($row = mysqli_fetch_assoc($result)) {  // mysqli_fetch_assoc iterates thro
 
 if($data === []) { // if query id does not exist, result will not return anything. So this tests if the id is invalid
     print("[]");
-}
-
-if(count($data) === 1) {
-    print(json_encode($data)); // index 0 because this returns an array with one object inside
+    exit();
 } else {
     print(json_encode($data));
 }
+
 ?>

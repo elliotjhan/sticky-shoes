@@ -114,13 +114,19 @@ class App extends React.Component {
       });
   }
 
-  deleteFromCart(element) {
-    let index = this.state.cart.indexOf(element);
-    let newCart = this.state.cart;
-    newCart.splice(index, 1);
-    this.setState({
-      cart: newCart
-    });
+  deleteFromCart(productId) {
+    fetch('/api/cart.php', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        id: parseInt(productId)
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .catch(error => {
+        console.error('Post Error: ', error);
+      });
   }
 
   placeOrder(object) {
@@ -150,29 +156,47 @@ class App extends React.Component {
     if (currentView.name === 'details') {
       return (
         <div>
-          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
-          <ProductDetails getCartItems={this.getCartItems} addToCart={this.addToCart} setView={this.setView} id={clickedId}/>
+          <Header getCartItems={this.getCartItems}
+            cartLength={this.state.cartLength}
+            setView={this.setView}/>
+          <ProductDetails getCartItems={this.getCartItems}
+            addToCart={this.addToCart}
+            setView={this.setView}
+            id={clickedId}/>
         </div>
       );
     } else if (currentView.name === 'catalog') {
       return (
         <div>
-          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
-          <ProductList setView={this.setView} productList={this.state.products}/>
+          <Header getCartItems={this.getCartItems}
+            cartLength={this.state.cartLength}
+            setView={this.setView}/>
+          <ProductList setView={this.setView}
+            productList={this.state.products}/>
         </div>
       );
     } else if (currentView.name === 'cart') {
       return (
         <div>
-          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
-          <CartSummary updateCart={this.updateCart} delete={this.deleteFromCart} setView={this.setView} cart={this.state.cart} getCartItems={this.getCartItems}/>
+          <Header getCartItems={this.getCartItems}
+            cartLength={this.state.cartLength}
+            setView={this.setView}/>
+          <CartSummary updateCart={this.updateCart}
+            deleteFromCart={this.deleteFromCart}
+            setView={this.setView}
+            cart={this.state.cart}
+            getCartItems={this.getCartItems}/>
         </div>
       );
     } else if (currentView.name === 'checkout') {
       return (
         <div>
-          <Header getCartItems={this.getCartItems} cartLength={this.state.cartLength} setView={this.setView}/>
-          <CheckoutForm cart={this.state.cart} setView={this.setView} placeOrder={this.placeOrder}/>
+          <Header getCartItems={this.getCartItems}
+            cartLength={this.state.cartLength}
+            setView={this.setView}/>
+          <CheckoutForm cart={this.state.cart}
+            setView={this.setView}
+            placeOrder={this.placeOrder}/>
         </div>
       );
     } else if (currentView.name === 'landingPage') {
