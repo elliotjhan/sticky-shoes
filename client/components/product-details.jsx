@@ -45,7 +45,9 @@ class ProductDetails extends React.Component {
     let product = this.state.product;
     let quantity = this.state.quantity;
     addCartCallback(product, quantity);
-    this.props.getCartItems();
+    setTimeout(() => {
+      this.props.getCartItems();
+    }, 100);
   }
 
   numberWithCommas(number) { // regex method to put in commas at thousands places

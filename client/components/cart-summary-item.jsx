@@ -25,14 +25,22 @@ class CartSummaryItem extends React.Component {
   handleDeleteCallback() {
     let product = this.props.product;
     this.props.deleteFromCart(product.id);
+    // setTimeout(()=> {
+    //   this.props.getCartItems();
+    // }, 200)
     this.props.getCartItems();
+
   }
 
   handleUpdateCallback() {
     let product = this.props.product;
     let newCount = this.state.count;
     this.props.updateCart(product.id, newCount);
+    // setTimeout(()=> {
+    //   this.props.getCartItems();
+    // }, 200)
     this.props.getCartItems();
+
   }
 
   handleCount() {
