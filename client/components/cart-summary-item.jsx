@@ -74,12 +74,12 @@ class CartSummaryItem extends React.Component {
       backgroundRepeat: 'no-repeat'
     };
     return (
-      <div className="container mt-4 p-4 pb-5">
+      <div className="container p-4">
         <div className="row mt-3">
           <div className="col productItem" style={style}></div>
           <div className="text-left col-sm-6 mt-3 text-center">
             <div className="display-4 cartProductName">{product.name}</div><br/>
-            <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3>
+            <div className="productPrice">${this.numberWithCommas(product.price)}</div>
             <QuantityUpdate increment={this.increment} decrement={this.decrement} quantity={this.state.count}/>
             <button onClick={this.handleUpdateCallback} className="btn btn-primary">Update</button><br/>
             <button onClick={this.handleDeleteCallback} className="btn btn-danger px-3 mt-2">Delete</button>

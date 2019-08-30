@@ -90,7 +90,7 @@ class ProductDetails extends React.Component {
           <div className="row mt-4">
             <div className="col-lg-6 productItem" style={style}></div>
             <div className="text-center col-lg-6 mt-3">
-              <div className="display-3">{product.name}</div><br/>
+              <div className="display-3 productDetailsName">{product.name}</div><br/>
               <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3><br/>
               <div className="font-italic">{product.shortDescription}</div><br/>
               <Quantity increment={this.increment} decrement={this.decrement} quantity={this.state.quantity} />

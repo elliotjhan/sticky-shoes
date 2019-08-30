@@ -29,10 +29,10 @@ class Header extends React.Component {
             </div>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-4 mt-3 headerCartContainer">
-            <div className="cartLength">
-              {this.props.cartLength}
-            </div>
             <div onClick={this.handleCartClick.bind(this)} className="cursor text-white shoppingCart">
+              <div className="cartLength">
+                {this.props.cartLength}
+              </div>
             </div>
           </div>
         </div>
