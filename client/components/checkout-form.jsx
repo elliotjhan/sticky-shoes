@@ -9,7 +9,7 @@ class CheckoutForm extends React.Component {
       shippingAddress: null
     };
     this.handleInput = this.handleInput.bind(this);
-    this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
+    this.handleDeleteCartUponCompletingCheckout = this.handleDeleteCartUponCompletingCheckout.bind(this);
   }
 
   numberWithCommas(number) {
@@ -33,16 +33,19 @@ class CheckoutForm extends React.Component {
     });
   }
 
-  handlePlaceOrder() {
-    let placeOrder = this.props.placeOrder; // callback function goes back to app.jsx with the credit card info etc
-    placeOrder(this.state);
-  }
-
   handleSetView() {
     let setView = this.props.setView;
     let catalog = 'catalog';
-    let params = 'params';
+    let params = '{}';
     setView(catalog, params);
+    this.props.getCartItems();
+  }
+
+  handleDeleteCartUponCompletingCheckout() {
+    let deleteEntireCart = this.props.deleteEntireCart;
+    let cartId = this.props.cart[0].cartID;
+    deleteEntireCart(cartId);
+    this.handleSetView();
   }
 
   render() {
@@ -79,7 +82,7 @@ class CheckoutForm extends React.Component {
                         &lt;Continue Shopping
           </div>
           <div className="col text-right">
-            <button className="btn btn-primary" onClick={this.handlePlaceOrder}>Place Order</button>
+            <button className="btn btn-primary" onClick={this.handleDeleteCartUponCompletingCheckout}>Place Order</button>
           </div>
         </div>
       </div>

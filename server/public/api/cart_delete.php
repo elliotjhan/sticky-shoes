@@ -10,7 +10,7 @@ if(!INTERNAL) {
 $item = file_get_contents('php://input');
 $jsonBody = getBodyData($item);
 
-if($jsonBody->id) {
+if(!empty($jsonBody->id)) {
     $id = $jsonBody->id;
     if(intval($id) < 1) {
         throw new Exception('id must be greater than 0');
@@ -18,6 +18,16 @@ if($jsonBody->id) {
     if(gettype($id) !== "integer") {
         throw new Exception('id must be a number');
     }
+    $query = "DELETE from `cartItems` WHERE `cartItems`.`productID` = {$id}";
+} else if($jsonBody->cartId) {
+    $cartId = $jsonBody->cartId;
+    if(intval($cartId) < 1) {
+        throw new Exception('id must be greater than 0');
+    }
+    if(gettype($cartId) !== "integer") {
+        throw new Exception('id must be a number');
+    }
+    $query = "DELETE from `cartItems` WHERE `cartItems`.`cartID` = {$cartId}";
 } else {
     throw new Exception('id required to add to cart');
 } 
@@ -29,7 +39,6 @@ if(empty($_SESSION['cartId'])) {
     $cartId = intval($_SESSION['cartId']);
 }
 
-$query = "DELETE from `cartItems` WHERE `cartItems`.`productID` = {$id}";
 $result = mysqli_query($conn, $query);
 if(!$result) {
     throw new Exception('error with query: '. mysqli_error($conn)); // if $result is undefined, throw exception

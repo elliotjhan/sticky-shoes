@@ -25,6 +25,7 @@ class App extends React.Component {
     this.getCartItems = this.getCartItems.bind(this);
     this.getCartLength = this.getCartLength.bind(this);
     this.updateCart = this.updateCart.bind(this);
+    this.deleteEntireCart = this.deleteEntireCart.bind(this);
   }
 
   componentDidMount() {
@@ -129,6 +130,21 @@ class App extends React.Component {
       });
   }
 
+  deleteEntireCart(cartId) {
+    fetch('/api/cart.php', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        cartId: parseInt(cartId)
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .catch(error => {
+        console.error('Post Error: ', error);
+      });
+  }
+
   placeOrder(object) {
     let currentOrder = this.state.cart.push(object); // object in this case is the name, credit card, and address
     fetch('/api/orders.php', {
@@ -196,7 +212,8 @@ class App extends React.Component {
             setView={this.setView}/>
           <CheckoutForm cart={this.state.cart}
             setView={this.setView}
-            placeOrder={this.placeOrder}/>
+            getCartItems={this.getCartItems}
+            deleteEntireCart={this.deleteEntireCart}/>
         </div>
       );
     } else if (currentView.name === 'landingPage') {
