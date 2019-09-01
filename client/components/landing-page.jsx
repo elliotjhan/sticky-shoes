@@ -1,4 +1,6 @@
 import React from 'react';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
 
 class LandingPage extends React.Component {
 
@@ -34,6 +36,24 @@ class LandingPage extends React.Component {
           <div className="row disclaimer">
             <div className="col text-right">
                             Disclaimer: This is not a real e-commerce site and is for demonstration purposes only
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <Carousel>
+                <div>
+                  <img src="./images/shaman.jpg" />
+                  <p className="legend">Legend 1</p>
+                </div>
+                <div>
+                  <img src="./images/shaman.jpg" />
+                  <p className="legend">Legend 2</p>
+                </div>
+                <div>
+                  <img src="./images/shaman.jpg" />
+                  <p className="legend">Legend 3</p>
+                </div>
+              </Carousel>
             </div>
           </div>
         </div>
