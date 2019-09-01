@@ -20,6 +20,14 @@ class CartSummary extends React.Component {
     return this.numberWithCommas(cartTotal);
   }
 
+  getCartLength() {
+    let cartLength = null;
+    this.props.cart.forEach(element => {
+      cartLength += parseFloat(element.count);
+    });
+    return cartLength;
+  }
+
   setViewCallback() { // callback function that toggles what the mainpage will display.
     let callback = this.props.setView;
     let catalog = 'catalog'; // putting in catalog will make the react render back to main page which is catalog
@@ -60,7 +68,7 @@ class CartSummary extends React.Component {
             {cartItemArrayDisplay}
           </div>
           <div className="row align-items-center">
-            <h2 className="col text-left mt-3 display-4 cartSubtotal">Subtotal: ${this.getCartTotal()}</h2>
+            <h2 className="col text-left mt-3 display-4 cartSubtotal">Subtotal ({this.getCartLength()} items): ${this.getCartTotal()}</h2>
             <div className="col text-right ">
               <button onClick={this.setViewCheckout.bind(this)} className="btn btn-primary">Checkout</button>
             </div>
