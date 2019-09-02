@@ -7,11 +7,12 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 .disclaimer {
-    position: fixed;
+    position: absolute;
     bottom:0;
     right: 0;
-    width:100%;
     color: rgb(255, 255, 255);
+    margin-right: 10px;
+    margin-bottom: 5px;
 }
 .headerContainer {
     background-image: linear-gradient(to right, rgb(17, 17, 17), rgb(41, 41, 41));
