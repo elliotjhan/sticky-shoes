@@ -1,15 +1,27 @@
 <?php
 
-header('Content-Type: application/json');
+define('INTERNAL', true);
+require_once('functions.php');
+session_start();
+set_exception_handler('error_handler');
+startup();
+require_once('db_connection.php');
+
 
 $method = $_SERVER['REQUEST_METHOD'];
-$item = file_get_contents('php://input');
+//$item = file_get_contents('php://input');
 
 if ($method == 'GET') {
-  readfile('dummy-cart-items.json');
+  http_response_code(200);
+  require_once('cart_get.php');
 } else if ($method == 'POST') {
   http_response_code(201);
-  print($item);
+  require_once('cart_add.php');
+  // print($item);
+} else if ($method == 'PUT') {
+  require_once('cart_update.php');
+} else if ($method == 'DELETE') {
+  require_once('cart_delete.php');
 } else {
   http_response_code(404);
   print(json_encode([
