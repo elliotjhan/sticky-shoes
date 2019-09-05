@@ -1,5 +1,7 @@
 import React from 'react';
 import Quantity from './quantity';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -71,24 +73,41 @@ class ProductDetails extends React.Component {
     });
   }
 
+  renderProductImageCarousel() {
+    let product = this.state.product;
+    let imageArray = product.image;
+    let carousel = imageArray.map(element => {
+      return (
+        <div key={imageArray.indexOf(element)}>
+          <img className="carouselImage" src={element}/>
+        </div>
+      );
+    });
+    return carousel;
+  }
+
   render() {
 
     if (this.state.product !== null) {
       let product = this.state.product;
-      let imageUrl = product.image[0];// temporarily set to 0 so image pops up for product details for all items
-      const style = {
-        backgroundImage: `url(${imageUrl})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat'
-      };
       return (
         <div className="container p-4 catalogItem my-5">
           <div onClick={this.setViewCallback.bind(this)} className="cursor row mb-4">
             <div className="col text-dark">&lt;Back to catalog</div>
           </div>
           <div className="row mt-4">
-            <div className="col-lg-6 productItem" style={style}></div>
+            <div className="col-lg-6">
+              <Carousel
+                showThumbs={false}
+                showStatus={false}
+                autoPlay={true}
+                width="30vw"
+                interval={2500}
+                infiniteLoop={true}
+                stopOnHover={true}>
+                {this.renderProductImageCarousel()}
+              </Carousel>
+            </div>
             <div className="text-center col-lg-6 mt-3">
               <div className="display-3 productDetailsName">{product.name}</div><br/>
               <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3><br/>
