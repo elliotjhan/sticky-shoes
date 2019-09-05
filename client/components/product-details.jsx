@@ -78,7 +78,7 @@ class ProductDetails extends React.Component {
     let imageArray = product.image;
     let carousel = imageArray.map(element => {
       return (
-        <div>
+        <div key={imageArray.indexOf(element)}>
           <img className="carouselImage" src={element}/>
         </div>
       );
