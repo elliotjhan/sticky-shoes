@@ -19,9 +19,11 @@
     ]
   },
   "dependencies": {
+    "bootstrap": "4.3.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-responsive-carousel": "3.1.50"
+    "react-responsive-carousel": "3.1.50",
+    "reactstrap": "8.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.4.4",

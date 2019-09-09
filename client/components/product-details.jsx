@@ -113,7 +113,7 @@ class ProductDetails extends React.Component {
               <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3><br/>
               <div className="font-italic">{product.shortDescription}</div><br/>
               <Quantity increment={this.increment} decrement={this.decrement} quantity={this.state.quantity} />
-              <button className="btn btn-primary" onClick={this.addToCart}>Add To Cart</button>
+              <button data-toggle="modal" data-target="#exampleModal" className="btn btn-primary" onClick={this.addToCart}>Add To Cart</button>
             </div>
           </div>
           <div className="row mt-4">
