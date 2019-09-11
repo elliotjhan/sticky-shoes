@@ -2,7 +2,8 @@ import React from 'react';
 import Quantity from './quantity';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
-import { Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -33,8 +34,6 @@ class ProductDetails extends React.Component {
         console.error('error: ', error);
       });
   }
-
-  
 
   resetQuantity() {
     this.setState({
@@ -103,7 +102,7 @@ class ProductDetails extends React.Component {
   toggleModal() {
     this.setState({
       modalIsOpen: !this.state.modalIsOpen
-    })
+    });
   }
 
   render() {
