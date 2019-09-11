@@ -21,6 +21,7 @@
   "dependencies": {
     "bootstrap": "4.3.1",
     "react": "16.8.6",
+    "react-bootstrap": "1.0.0-beta.12",
     "react-dom": "16.8.6",
     "react-responsive-carousel": "3.1.50",
     "reactstrap": "8.0.1"
