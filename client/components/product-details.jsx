@@ -2,6 +2,8 @@ import React from 'react';
 import Quantity from './quantity';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
+import { Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 class ProductDetails extends React.Component {
   constructor(props) {
