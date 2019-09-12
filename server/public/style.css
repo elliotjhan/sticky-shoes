@@ -295,6 +295,9 @@
     .my-5 {
         margin-bottom: 0!important;
     }
+    .carousel {
+        margin-left: 0 auto!important;
+    }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 900px) {
