@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -6,10 +7,12 @@ class CheckoutForm extends React.Component {
     this.state = {
       name: null,
       creditCard: null,
-      shippingAddress: null
+      shippingAddress: null,
+      modalIsOpen: false
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleDeleteCartUponCompletingCheckout = this.handleDeleteCartUponCompletingCheckout.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   numberWithCommas(number) {
@@ -42,10 +45,18 @@ class CheckoutForm extends React.Component {
   }
 
   handleDeleteCartUponCompletingCheckout() {
+    this.toggleModal();
     let deleteEntireCart = this.props.deleteEntireCart;
     let cartId = this.props.cart[0].cartID;
     deleteEntireCart(cartId);
     this.handleSetView();
+    
+  }
+
+  toggleModal() {
+    this.setState({
+      modalIsOpen: !this.state.modalIsOpen
+    });
   }
 
   render() {
@@ -82,9 +93,19 @@ class CheckoutForm extends React.Component {
                         &lt;Continue Shopping
           </div>
           <div className="col text-right">
-            <button className="btn btn-primary" onClick={this.handleDeleteCartUponCompletingCheckout}>Place Order</button>
+            <button className="btn btn-primary" onClick={this.toggleModal}>Place Order</button>
           </div>
         </div>
+
+        <Modal isOpen={this.state.modalIsOpen}>
+            <ModalHeader>
+              Order Has Been Submitted!
+            </ModalHeader>
+            <ModalFooter>
+              <Button onClick={this.handleDeleteCartUponCompletingCheckout} color="primary">Back To Catalog</Button>
+            </ModalFooter>
+        </Modal>
+
       </div>
     );
   }

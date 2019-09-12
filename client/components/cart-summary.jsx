@@ -70,8 +70,8 @@ class CartSummary extends React.Component {
           <div className="row align-items-center">
             <div className="col text-left mt-3 cartSubtotal">Subtotal ({this.getCartLength()} items): ${this.getCartTotal()}</div>
             <div className="col text-right ">
+              <button onClick={this.setViewCallback.bind(this)} className="btn btn-info mr-3">Keep Shopping</button>
               <button onClick={this.setViewCheckout.bind(this)} className="btn btn-primary">Checkout</button>
-              <button onClick={this.setViewCallback.bind(this)} className="btn btn-info ml-3">Keep Shopping</button>
             </div>
           </div>
           <br/>

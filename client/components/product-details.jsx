@@ -132,8 +132,8 @@ class ProductDetails extends React.Component {
               <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3><br/>
               <div className="font-italic">{product.shortDescription}</div><br/>
               <Quantity increment={this.increment} decrement={this.decrement} quantity={this.state.quantity} />
-              <button className="btn btn-primary mr-3" onClick={this.addToCart}>Add To Cart</button>
-              <button className="btn btn-info" onClick={this.handleSetViewCatalog}>Keep Shopping</button>
+              <button className="btn btn-info mr-3" onClick={this.handleSetViewCatalog}>Back To Catalog</button>
+              <button className="btn btn-primary" onClick={this.addToCart}>Add To Cart</button>
             </div>
           </div>
           <div className="row mt-4">
@@ -145,8 +145,8 @@ class ProductDetails extends React.Component {
               Product has been added to cart!
             </ModalHeader>
             <ModalFooter>
-              <Button onClick={this.toggleModal} color="primary">Keep Shopping</Button>
-              <Button onClick={this.handleSetViewCart} color="info">Go To Cart</Button>
+              <Button onClick={this.toggleModal} color="info">Keep Shopping</Button>
+              <Button onClick={this.handleSetViewCart} color="primary">Go To Cart</Button>
             </ModalFooter>
           </Modal>
 
