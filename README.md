@@ -14,11 +14,11 @@ Back-end was structured using a MySQL + phpMyAdmin database and PHP.
 
     1. Fork this repo and clone from the terminal. 
 
->       $ git clone https://github.com/elliotjhan/sticky_shoes
+       $ git clone https://github.com/elliotjhan/sticky_shoes
 
     2. Navigate into cloned directory and be on the master branch.
 
->       $ npm install
+       $ npm install
 
     3. Start a dev environment with Apache2 and MySQL:
         - Ensure that the port is on 3000
@@ -27,7 +27,7 @@ Back-end was structured using a MySQL + phpMyAdmin database and PHP.
 
     4. Initiate the dev server
 
->       $ npm run dev 
+       $ npm run dev 
 
     5. Go to `localhost:3000` and enjoy
 
