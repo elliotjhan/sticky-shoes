@@ -1,16 +1,23 @@
 import React from 'react';
 import Quantity from './quantity';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       product: null,
-      quantity: 1
+      quantity: 1,
+      modalIsOpen: false
     };
     this.addToCart = this.addToCart.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
+    this.handleSetViewCart = this.handleSetViewCart.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleSetViewCatalog = this.handleSetViewCatalog.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +41,14 @@ class ProductDetails extends React.Component {
     });
   }
 
-  setViewCallback() {
+  handleSetViewCart() {
+    let setView = this.props.setView;
+    let cart = 'cart';
+    let param = {};
+    setView(cart, param);
+  }
+
+  handleSetViewCatalog() {
     let callback = this.props.setView;
     let catalog = 'catalog';
     callback(catalog, this.state.product);
@@ -48,6 +62,7 @@ class ProductDetails extends React.Component {
     setTimeout(() => {
       this.props.getCartItems();
     }, 100);
+    this.toggleModal();
   }
 
   numberWithCommas(number) { // regex method to put in commas at thousands places
@@ -71,35 +86,70 @@ class ProductDetails extends React.Component {
     });
   }
 
+  renderProductImageCarousel() {
+    let product = this.state.product;
+    let imageArray = product.image;
+    let carousel = imageArray.map(element => {
+      return (
+        <div key={imageArray.indexOf(element)}>
+          <img className="carouselImage" src={element}/>
+        </div>
+      );
+    });
+    return carousel;
+  }
+
+  toggleModal() {
+    this.setState({
+      modalIsOpen: !this.state.modalIsOpen
+    });
+  }
+
   render() {
 
     if (this.state.product !== null) {
       let product = this.state.product;
-      let imageUrl = product.image[0];// temporarily set to 0 so image pops up for product details for all items
-      const style = {
-        backgroundImage: `url(${imageUrl})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat'
-      };
       return (
         <div className="container p-4 catalogItem my-5">
-          <div onClick={this.setViewCallback.bind(this)} className="cursor row mb-4">
+          <div onClick={this.handleSetViewCatalog} className="cursor row mb-4">
             <div className="col text-dark">&lt;Back to catalog</div>
           </div>
           <div className="row mt-4">
-            <div className="col-lg-6 productItem" style={style}></div>
+            <div className="col-lg-6">
+              <Carousel
+                showThumbs={false}
+                showStatus={false}
+                autoPlay={true}
+                width="30vw"
+                interval={2500}
+                infiniteLoop={true}
+                stopOnHover={true}>
+                {this.renderProductImageCarousel()}
+              </Carousel>
+            </div>
             <div className="text-center col-lg-6 mt-3">
               <div className="display-3 productDetailsName">{product.name}</div><br/>
               <h3 className="font-weight-bold">${this.numberWithCommas(product.price)}</h3><br/>
               <div className="font-italic">{product.shortDescription}</div><br/>
               <Quantity increment={this.increment} decrement={this.decrement} quantity={this.state.quantity} />
+              <button className="btn btn-info mr-3" onClick={this.handleSetViewCatalog}>Back To Catalog</button>
               <button className="btn btn-primary" onClick={this.addToCart}>Add To Cart</button>
             </div>
           </div>
           <div className="row mt-4">
             <div className="col">{product.longDescription}</div>
           </div>
+
+          <Modal isOpen={this.state.modalIsOpen}>
+            <ModalHeader>
+              Product has been added to cart!
+            </ModalHeader>
+            <ModalFooter>
+              <Button onClick={this.toggleModal} color="info">Keep Shopping</Button>
+              <Button onClick={this.handleSetViewCart} color="primary">Go To Cart</Button>
+            </ModalFooter>
+          </Modal>
+
         </div>
       );
     } else {

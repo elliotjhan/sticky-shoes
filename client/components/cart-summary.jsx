@@ -68,8 +68,9 @@ class CartSummary extends React.Component {
             {cartItemArrayDisplay}
           </div>
           <div className="row align-items-center">
-            <h2 className="col text-left mt-3 display-4 cartSubtotal">Subtotal ({this.getCartLength()} items): ${this.getCartTotal()}</h2>
+            <div className="col text-left mt-3 cartSubtotal">Subtotal ({this.getCartLength()} items): ${this.getCartTotal()}</div>
             <div className="col text-right ">
+              <button onClick={this.setViewCallback.bind(this)} className="btn btn-info mr-3">Keep Shopping</button>
               <button onClick={this.setViewCheckout.bind(this)} className="btn btn-primary">Checkout</button>
             </div>
           </div>
