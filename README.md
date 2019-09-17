@@ -5,8 +5,7 @@
 
 Here you will see a shopping center for the hottest rock climbing shoes today.
 You may view pictures of chosen shoe, read the description, and add them to your cart for purchase.
-This particular site was built using React.js for front-end. 
-Back-end was structured using a MySQL + phpMyAdmin database and PHP.
+Navigate the site and choose your favorite shoes to purchase. 
 
 # Getting Started
 
@@ -30,6 +29,16 @@ Back-end was structured using a MySQL + phpMyAdmin database and PHP.
        $ npm run dev
 
 5. Go to `localhost:3000` and enjoy
+
+# Technologies 
+
+1. React.js
+2. HTML5
+3. CSS3
+4. Bootstrap 4
+5. PHP
+6. MySQL
+7. phpMyAdmin 
 
 # Contributing
 
