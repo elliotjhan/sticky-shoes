@@ -5,6 +5,7 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import LandingPage from './landing-page';
+import OrderConfirmation from './order-confirmation';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,13 @@ class App extends React.Component {
         params: {}
       },
       cart: [],
-      cartLength: 0
+      cartLength: 0,
+      orderSummary: [],
+      creditCard: null,
+      shippingAddress: null,
+      cartError: null,
+      name: null,
+      confirmationNumber: null
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -26,11 +33,16 @@ class App extends React.Component {
     this.getCartLength = this.getCartLength.bind(this);
     this.updateCart = this.updateCart.bind(this);
     this.deleteEntireCart = this.deleteEntireCart.bind(this);
+    this.storeOrderSummaryInfo = this.storeOrderSummaryInfo.bind(this);
+    this.resetCardShippingName = this.resetCardShippingName.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.generateConfirmationNumber = this.generateConfirmationNumber.bind(this);
   }
 
   componentDidMount() {
     this.getProducts();
     this.getCartItems();
+    this.generateConfirmationNumber();
   }
 
   getProducts() {
@@ -68,7 +80,9 @@ class App extends React.Component {
         }, this.getCartLength);
       })
       .catch(error => {
-        console.error('error with cart retrieval: ', error);
+        this.setState({
+          cartError: error
+        });
       });
   }
 
@@ -166,13 +180,53 @@ class App extends React.Component {
     });
   }
 
+  storeOrderSummaryInfo(cart) {
+    this.setState({
+      orderSummary: cart
+    });
+  }
+
+  handleInput(event) {
+    let value = event.target.value; // this updates state as the user types in their input through onChange
+    let name = event.target.name;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  resetCardShippingName() {
+    this.setState({
+      name: null,
+      shippingAddress: null,
+      creditCard: null
+    });
+  }
+
+  generateConfirmationNumber() {
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    const pool = [letters, numbers];
+    let confirmationNumber = '';
+    for (let i = 0; i < 10; i++) {
+      let zeroOrOne = Math.floor(Math.random() * 2);
+      let currentPool = pool[zeroOrOne];
+      let currentSelection = currentPool[Math.floor(Math.random() * currentPool.length)];
+      confirmationNumber += currentSelection;
+    }
+    this.setState({
+      confirmationNumber: confirmationNumber
+    });
+  }
+
   render() {
     let currentView = this.state.view;
     let clickedId = currentView.params.id;
     if (currentView.name === 'details') {
       return (
         <div>
-          <Header getCartItems={this.getCartItems}
+          <Header
+            resetCardShippingName={this.resetCardShippingName}
+            getCartItems={this.getCartItems}
             cartLength={this.state.cartLength}
             setView={this.setView}/>
           <ProductDetails getCartItems={this.getCartItems}
@@ -184,7 +238,9 @@ class App extends React.Component {
     } else if (currentView.name === 'catalog') {
       return (
         <div>
-          <Header getCartItems={this.getCartItems}
+          <Header
+            resetCardShippingName={this.resetCardShippingName}
+            getCartItems={this.getCartItems}
             cartLength={this.state.cartLength}
             setView={this.setView}/>
           <ProductList setView={this.setView}
@@ -194,10 +250,13 @@ class App extends React.Component {
     } else if (currentView.name === 'cart') {
       return (
         <div>
-          <Header getCartItems={this.getCartItems}
+          <Header
+            resetCardShippingName={this.resetCardShippingName}
+            getCartItems={this.getCartItems}
             cartLength={this.state.cartLength}
             setView={this.setView}/>
-          <CartSummary updateCart={this.updateCart}
+          <CartSummary
+            updateCart={this.updateCart}
             deleteFromCart={this.deleteFromCart}
             setView={this.setView}
             cart={this.state.cart}
@@ -207,12 +266,22 @@ class App extends React.Component {
     } else if (currentView.name === 'checkout') {
       return (
         <div>
-          <Header getCartItems={this.getCartItems}
+          <Header
+            resetCardShippingName={this.resetCardShippingName}
+            getCartItems={this.getCartItems}
             cartLength={this.state.cartLength}
             setView={this.setView}/>
-          <CheckoutForm cart={this.state.cart}
+          <CheckoutForm
+            generateConfirmationNumber={this.generateConfirmationNumber}
+            cart={this.state.cart}
+            resetCardShippingName={this.resetCardShippingName}
+            handleInput={this.handleInput}
             setView={this.setView}
             getCartItems={this.getCartItems}
+            creditCard={this.state.creditCard}
+            name={this.state.name}
+            shippingAddress={this.state.shippingAddress}
+            storeOrderSummaryInfo={this.storeOrderSummaryInfo}
             deleteEntireCart={this.deleteEntireCart}/>
         </div>
       );
@@ -220,6 +289,23 @@ class App extends React.Component {
       return (
         <div>
           <LandingPage setView={this.setView} />
+        </div>
+      );
+    } else if (currentView.name === 'orderConfirmation') {
+      return (
+        <div>
+          <Header
+            resetCardShippingName={this.resetCardShippingName}
+            getCartItems={this.getCartItems}
+            setView={this.setView} />
+          <OrderConfirmation
+            confirmationNumber={this.state.confirmationNumber}
+            name={this.state.name}
+            shippingAddress={this.state.shippingAddress}
+            orderSummary={this.state.orderSummary}
+            setView={this.setView}
+            resetCardShippingName={this.resetCardShippingName}
+          />
         </div>
       );
     }
