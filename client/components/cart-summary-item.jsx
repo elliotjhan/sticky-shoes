@@ -1,16 +1,19 @@
 import React from 'react';
 import QuantityUpdate from './quantityUpdate';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class CartSummaryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
+      modalIsOpen: false
     };
     this.handleUpdateCallback = this.handleUpdateCallback.bind(this);
     this.handleDeleteCallback = this.handleDeleteCallback.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -60,8 +63,17 @@ class CartSummaryItem extends React.Component {
   decrement() {
     let count = this.state.count;
     let newCount = --count;
+    if (newCount < 0) {
+      newCount = 0;
+    }
     this.setState({
       count: newCount
+    });
+  }
+
+  toggleModal() {
+    this.setState({
+      modalIsOpen: !this.state.modalIsOpen
     });
   }
 
@@ -81,10 +93,24 @@ class CartSummaryItem extends React.Component {
             <h6 className="cartProductName">{product.name}</h6><br/>
             <div className="productPrice">Price: ${this.numberWithCommas(product.price)}</div>
             <QuantityUpdate increment={this.increment} decrement={this.decrement} quantity={this.state.count}/>
-            <button onClick={this.handleUpdateCallback} className="btn btn-primary">Update</button><br/>
-            <button onClick={this.handleDeleteCallback} className="btn btn-danger px-3 mt-2">Delete</button>
+            <button onClick={this.handleUpdateCallback} className="btn btn-primary">Update</button>
+            <button onClick={this.toggleModal} className="btn btn-danger ml-2">Delete</button>
           </div>
         </div>
+
+        <Modal isOpen={this.state.modalIsOpen}>
+          <ModalHeader>
+              Caution!
+          </ModalHeader>
+          <ModalBody>
+              Are you sure you want to delete {product.name}?
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={this.toggleModal}>No</Button>
+            <Button onClick={this.handleDeleteCallback} color="primary">Yes</Button>
+          </ModalFooter>
+        </Modal>
+
       </div>
     );
   }
