@@ -1,6 +1,13 @@
 import React from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class LandingPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalIsOpen: false
+    };
+  }
 
   setViewCallback() {
     let callback = this.props.setView;
@@ -9,10 +16,16 @@ class LandingPage extends React.Component {
     callback(catalog, object);
   }
 
+  toggleModal() {
+    this.setState({
+      modalIsOpen: !this.state.modalIsOpen
+    });
+  }
+
   render() {
     return (
       <div className="landingPage">
-        <div className="container-fluid p-5">
+        <div className="container-fluid p-5 landingPageContainer">
           <br/>
           <div className="row">
             <div className="col landingPageTitle">Sticky Shoes</div>
@@ -28,16 +41,24 @@ class LandingPage extends React.Component {
           <br/><br/>
           <div className="row">
             <div className="col">
-              <button onClick={this.setViewCallback.bind(this)} className="landingPageButton">Explore</button>
-            </div>
-          </div>
-          <div className="disclaimer">
-            <div>
-              Disclaimer: This is not a real e-commerce site and is for demonstration purposes only
+              <button onClick={this.toggleModal.bind(this)} className="landingPageButton">Explore</button>
             </div>
           </div>
         </div>
-      </div>
+
+        <Modal isOpen={this.state.modalIsOpen}>
+          <ModalHeader>
+            We hope you enjoy your time here
+          </ModalHeader>
+          <ModalBody>
+            Disclaimer: This is not a real e-commerce site and is for demonstration purposes only.
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={this.setViewCallback.bind(this)} color="primary">Agree</Button>
+          </ModalFooter>
+        </Modal>
+
+      </div> // container closing tag
     );
 
   }
