@@ -2,10 +2,12 @@ import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 
 class CartSummary extends React.Component {
-
-  // componentDidMount() {
-  //   this.props.getCartItems();
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalIsOpen: false
+    };
+  }
 
   numberWithCommas(number) {
     let newNumber = (parseFloat(number) / 100).toFixed(2);
@@ -70,12 +72,13 @@ class CartSummary extends React.Component {
           <div className="row align-items-center">
             <div className="col text-left mt-3 cartSubtotal">Subtotal ({this.getCartLength()} items): ${this.getCartTotal()}</div>
             <div className="col text-right ">
-              <button onClick={this.setViewCallback.bind(this)} className="btn btn-info mr-3">Keep Shopping</button>
-              <button onClick={this.setViewCheckout.bind(this)} className="btn btn-primary">Checkout</button>
+              <button onClick={this.setViewCallback.bind(this)} className="btn btn-info mr-2 cartShoppingButton">Keep Shopping</button>
+              <button onClick={this.setViewCheckout.bind(this)} className="btn btn-primary cartCheckoutButton">Checkout</button>
             </div>
           </div>
           <br/>
         </div>
+
       );
     } else {
       return (
